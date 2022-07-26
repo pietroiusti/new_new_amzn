@@ -15,6 +15,15 @@ class Item extends HTMLElement {
   constructor() {
     super();
   }
+
+  handleClickAdd() {
+    console.log('add');
+  }
+
+  handleClickRemove() {
+    console.log('decrease');
+  }
+
   connectedCallback() {
     let name = this.getAttribute('name');
     let price = this.getAttribute('price');
@@ -28,17 +37,23 @@ class Item extends HTMLElement {
             </div>
             <div class="price">
                 ${price}
-            </div>
+R            </div>
             <div class="imgDiv">
                 <img src="${imgSrc}">
             </div>
             <div class="qtty">
                 ${qtty}
             </div>
-            <button onClick="removeItem(event)">-</button>
-            <button onClick="addItem(event)">+</button>
+            <button id="addButton">-</button>
+            <button id="removeButton">+</button>
         </div>
     `;
+
+    document.getElementById('addButton')
+      .addEventListener('click', this.handleClickAdd);
+
+    document.getElementById('removeButton')
+      .addEventListener('click', this.handleClickRemove);
   }
 }
 customElements.define('list-el', Item);
