@@ -16,20 +16,52 @@ class Item extends HTMLElement {
   constructor() {
     super();
   }
-
   connectedCallback() {
+    let name = this.getAttribute('name');
+    let price = this.getAttribute('price');
+    let imgSrc = this.getAttribute('imgSrc');
+    let qtty = this.getAttribute('qtty');
+
     this.innerHTML = `
-        <span class="${this.getAttribute('name')}">This is a span</span>
+        <div id="${name}" class="item">
+            <div class="name">
+                ${name}
+            </div>
+            <div class="price">
+                ${price}
+            </div>
+            <div class="imgDiv">
+                <img src="${imgSrc}">
+            </div>
+            <div>
+                ${qtty}
+            </div>
+            <button>-</button>
+            <button>+</button>
+        </div>
     `;
   }
 }
+
 customElements.define('list-item', Item);
 // now we can add to the html:  <list-item attribute=value></list-item>
 // or we can use js:
-let foo = document.createElement('list-item');
-foo.setAttribute('name', 'foobarbaz');
-document.getElementsByTagName('body')[0].appendChild(foo);
+// let foo = document.createElement('list-item');
+// foo.setAttribute('name', 'foobarbaz');
+// document.getElementsByTagName('body')[0].appendChild(foo);
 
+function render_list_of_items2() {
+  let itemList = document.getElementById('itemList');
+  for (let i = 0; i < data.length; i++) {
+    let name = data[i].name;
+    let item = document.createElement('list-item');
+    item.setAttribute('name', name);
+    item.setAttribute('price', data[i].price);
+    item.setAttribute('imgSrc', `./assets/img/${name}.jpg`);
+    item.setAttribute('qtty', data[i].qtty);
+    itemList.appendChild(item);
+  }
+}
 
 function addItem(event) {
   let parent = event.target.parentElement;
@@ -143,7 +175,7 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-// (function init() {
-//   renderBasket();
-//   render_list_of_items();
-// })();
+(function init() {
+  renderBasket();
+  render_list_of_items2();
+})();
