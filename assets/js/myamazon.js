@@ -16,14 +16,6 @@ class Item extends HTMLElement {
     super();
   }
 
-  handleClickAdd() {
-    console.log('add');
-  }
-
-  handleClickRemove() {
-    console.log('decrease');
-  }
-
   connectedCallback() {
     let name = this.getAttribute('name');
     let price = this.getAttribute('price');
@@ -44,19 +36,67 @@ class Item extends HTMLElement {
             <div class="qtty">
                 ${qtty}
             </div>
-            <button id="addButton">-</button>
-            <button id="removeButton">+</button>
+            <button id="remove${name}Button">-</button>
+            <button id="add${name}Button">+</button>
         </div>
     `;
 
-    document.getElementById('addButton')
-      .addEventListener('click', this.handleClickAdd);
+    document.getElementById(`add${name}Button`)
+      .addEventListener('click', (event) => {
+        this.handleClickAdd(event);
+      });
 
-    document.getElementById('removeButton')
-      .addEventListener('click', this.handleClickRemove);
+    document.getElementById(`remove${name}Button`)
+      .addEventListener('click', (event) => {
+        this.handleClickRemove(event);
+      });
+  }
+
+  handleClickAdd(event) {
+    //console.log(event.target.parentElement.id);
+    //console.log(event.target);
+    const customEvent = new CustomEvent('add', { bubbles: true, detail: event.target.parentElement.id});
+    //console.log(customEvent);
+    event.target.dispatchEvent(customEvent);
+  }
+
+  handleClickRemove(event) {
+    //console.log(event.target.parentElement.id);
+    //console.log(event.target);
+    const customEvent = new CustomEvent('remove', { bubbles: true, detail: event.target.parentElement.id});
+    //console.log(customEvent);
+    event.target.dispatchEvent(customEvent);
   }
 }
 customElements.define('list-el', Item);
+
+let itemList = document.getElementById('itemList');
+itemList.addEventListener('add', (e)=>{
+  //console.log(e);
+  let parent = e.target.parentElement;
+  let name = parent.id;
+  let item = data.find((item) => item.name === name);
+  item.qtty += 1;
+  let qtty = Number(parent.querySelector('.qtty').textContent);
+  parent.querySelector('.qtty').textContent = qtty + 1;
+
+  updateBasket(); // this shall be changed
+});
+itemList.addEventListener('remove', (e)=>{
+  //console.log(e);
+  let parent = event.target.parentElement;
+  let name = parent.id;
+  let item = data.find((item) => item.name === name);
+  if (item.qtty > 0) {
+    item.qtty -= 1;
+    // render new qtty
+    let qtty = Number(parent.querySelector('.qtty').textContent);
+    parent.querySelector('.qtty').textContent = qtty - 1;
+  }
+
+  updateBasket() // this shall be changed
+});
+
 
 class Basket extends HTMLElement {
   constructor() {
