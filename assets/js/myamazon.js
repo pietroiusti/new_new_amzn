@@ -11,7 +11,6 @@ var data = [
   {name: 'chipsahoy', price: 2.20, qtty: 0}
 ];
 
-// BASIC EXAMPLE
 class Item extends HTMLElement {
   constructor() {
     super();
@@ -44,11 +43,6 @@ class Item extends HTMLElement {
 }
 
 customElements.define('list-item', Item);
-// now we can add to the html:  <list-item attribute=value></list-item>
-// or we can use js:
-// let foo = document.createElement('list-item');
-// foo.setAttribute('name', 'foobarbaz');
-// document.getElementsByTagName('body')[0].appendChild(foo);
 
 function render_list_of_items2() {
   let itemList = document.getElementById('itemList');
