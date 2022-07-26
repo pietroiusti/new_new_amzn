@@ -33,11 +33,11 @@ class Item extends HTMLElement {
             <div class="imgDiv">
                 <img src="${imgSrc}">
             </div>
-            <div>
+            <div class="qtty">
                 ${qtty}
             </div>
-            <button>-</button>
-            <button>+</button>
+            <button onClick="removeItem(event)">-</button>
+            <button onClick="addItem(event)">+</button>
         </div>
     `;
   }
@@ -65,6 +65,7 @@ function render_list_of_items2() {
 
 function addItem(event) {
   let parent = event.target.parentElement;
+  console.log(parent);
   let name = parent.id;
   let item = data.find((item) => item.name === name);
   item.qtty += 1;
