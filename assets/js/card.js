@@ -1,39 +1,38 @@
 class Item extends HTMLElement {
   constructor() {
     super();
+    this.name = this.getAttribute('name');
+    this.price = this.getAttribute('price');
+    this.imgSrc = this.getAttribute('imgSrc');
+    this.qtty = this.getAttribute('qtty');
   }
 
   connectedCallback() {
-    let name = this.getAttribute('name');
-    let price = this.getAttribute('price');
-    let imgSrc = this.getAttribute('imgSrc');
-    let qtty = this.getAttribute('qtty');
-
     this.innerHTML = `
-        <div id="${name}" class="item">
+        <div id="${this.name}" class="item">
             <div class="name">
-                ${name}
+                ${this.name}
             </div>
             <div class="price">
-                ${price}
+                ${this.price}
             </div>
             <div class="imgDiv">
-                <img src="${imgSrc}">
+                <img src="${this.imgSrc}">
             </div>
             <div class="qtty">
-                ${qtty}
+                ${this.qtty}
             </div>
-            <button id="remove${name}Button">-</button>
-            <button id="add${name}Button">+</button>
+            <button id="remove${this.name}Button">-</button>
+            <button id="add${this.name}Button">+</button>
         </div>
     `;
 
-    document.getElementById(`add${name}Button`)
+    document.getElementById(`add${this.name}Button`)
       .addEventListener('click', (event) => {
         this.handleClickAdd(event);
       });
 
-    document.getElementById(`remove${name}Button`)
+    document.getElementById(`remove${this.name}Button`)
       .addEventListener('click', (event) => {
         this.handleClickRemove(event);
       });
