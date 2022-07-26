@@ -2,6 +2,7 @@ class Item extends HTMLElement {
   constructor() {
     super();
     this.name = this.getAttribute('name');
+    this.id = this.name+'Wrapper';
     this.price = this.getAttribute('price');
     this.imgSrc = this.getAttribute('imgSrc');
     this.qtty = this.getAttribute('qtty');
@@ -14,7 +15,7 @@ class Item extends HTMLElement {
                 ${this.name}
             </div>
             <div class="price">
-                ${this.price}
+                $ ${this.price}
             </div>
             <div class="imgDiv">
                 <img src="${this.imgSrc}">
@@ -39,17 +40,29 @@ class Item extends HTMLElement {
   }
 
   handleClickAdd(event) {
-    //console.log(event.target.parentElement.id);  // => whole card
-    //console.log(event.target); // => button
+    //event.target => button
     const customEvent = new CustomEvent('addItem', { bubbles: true });
     event.target.dispatchEvent(customEvent);
   }
 
   handleClickRemove(event) {
-    //console.log(event.target.parentElement.id); // => whole card
-    //console.log(event.target); // => button
+    //event.target => button
     const customEvent = new CustomEvent('removeItem', { bubbles: true });
     event.target.dispatchEvent(customEvent);
+  }
+
+  static get observedAttributes() {
+    return ['qtty'];
+  }
+
+  attributeChangedCallback(attrName, oldVal, newVal) {
+    // update view                       ************** TODO **********
+    if (attrName === 'qtty') {
+      let foo = document.getElementById(this.id);
+      console.log('I should change qtty using the component... but...')
+    } else {
+      console.log('??? '+ attrName);
+    }
   }
 }
 customElements.define('list-el', Item);

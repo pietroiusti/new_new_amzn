@@ -11,9 +11,6 @@ var data = [
   {name: 'chipsahoy', price: 2.20, qtty: 0}
 ];
 
-//card component was here...
-
-
 // Make list of items (cards) listen to the custom events ('addItem'
 // and 'removeItem') emitted by the buttons.
 let itemList = document.getElementById('itemList');
@@ -25,10 +22,9 @@ itemList.addEventListener('addItem', (e)=>{
   item.qtty += 1;
   // render new qtty
   let qtty = Number(parent.querySelector('.qtty').textContent);
-  parent.querySelector('.qtty').textContent = qtty + 1; // this shall be done through attribute of component!
+  parent.querySelector('.qtty').textContent = qtty + 1; // this shall be done through attribute of component! ***TODO***
 
-  //updateBasket();
-  updateBasket2();
+  updateBasket();
 });
 itemList.addEventListener('removeItem', (e)=>{
   //console.log(e);
@@ -39,14 +35,11 @@ itemList.addEventListener('removeItem', (e)=>{
     item.qtty -= 1;
     // render new qtty
     let qtty = Number(parent.querySelector('.qtty').textContent);
-    parent.querySelector('.qtty').textContent = qtty - 1; // this shall be done through attribute of component!
+    parent.querySelector('.qtty').textContent = qtty - 1; // this shall be done through attribute of component! ***TODO***
   }
 
-  //updateBasket()
-  updateBasket2();
+  updateBasket()
 });
-
-// basket component was here
 
 function renderBasket() {
   let basketDiv = document.getElementById('basketDiv');
@@ -67,33 +60,20 @@ function render_list_of_items() {
   }
 }
 
-function updateBasket2() {
-  let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
-  let totalPrice = data.reduce((acc, a) => acc + a.qtty*a.price, 0);
-  totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
-
-  console.log(totalNumber);
-  console.log(totalPrice);
-
-  let basketEl = document.getElementsByTagName('basket-el')[0];
-  console.log(basketEl);
-  //console.log("changing attributes of basket...")
-
-  basketEl.setAttribute('items', totalNumber);
-  basketEl.setAttribute('price', totalPrice);   // attributChangedCallBack does not react to this (?!)
-}
-
-
 function updateBasket() {
   let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
   let totalPrice = data.reduce((acc, a) => acc + a.qtty*a.price, 0);
   totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
 
-  let totalNumberDiv = document.getElementById('totalNumberDiv');
-  totalNumberDiv.textContent = 'Total number of items: ' + totalNumber;
+  //console.log(totalNumber);
+  //console.log(totalPrice);
 
-  let totalPriceDiv = document.getElementById('totalPriceDiv');
-  totalPriceDiv.textContent = 'Total Price: ' + totalPrice + ' $';
+  let basketEl = document.getElementsByTagName('basket-el')[0];
+  //console.log(basketEl);
+  //console.log("changing attributes of basket...")
+
+  basketEl.setAttribute('items', totalNumber);
+  basketEl.setAttribute('price', totalPrice);
 }
 
 function capitalizeFirstLetter(string) {
@@ -104,3 +84,4 @@ function capitalizeFirstLetter(string) {
   renderBasket();
   render_list_of_items();
 })();
+

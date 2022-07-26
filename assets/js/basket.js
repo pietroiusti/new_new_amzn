@@ -18,8 +18,8 @@ class Basket extends HTMLElement {
   }
 
   attributeChangedCallback(name, oldVal, newVal) {
-    // todo: update view
-    console.log('name: ' + name);
+    // update view
+    //console.log('name: ' + name);
     if (name === 'items') {
       document.getElementById('totalNumberDiv').innerHTML = 'Total number of items: ' + newVal;
     } else if (name === 'price') {
