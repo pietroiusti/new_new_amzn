@@ -37,7 +37,7 @@ class Item extends HTMLElement {
             </div>
             <div class="price">
                 ${price}
-R            </div>
+            </div>
             <div class="imgDiv">
                 <img src="${imgSrc}">
             </div>
