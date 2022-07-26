@@ -21,9 +21,10 @@ itemList.addEventListener('addItem', (e)=>{
   let item = data.find((item) => item.name === name);
   item.qtty += 1;
   let qtty = Number(parent.querySelector('.qtty').textContent);
-  parent.querySelector('.qtty').textContent = qtty + 1;
 
-  updateBasket2(); // this shall be changed
+  parent.querySelector('.qtty').textContent = qtty + 1; // this shall be done through attribute of component!
+
+  updateBasket2(); // TODO
 });
 
 itemList.addEventListener('removeItem', (e)=>{
@@ -35,12 +36,11 @@ itemList.addEventListener('removeItem', (e)=>{
     item.qtty -= 1;
     // render new qtty
     let qtty = Number(parent.querySelector('.qtty').textContent);
-    parent.querySelector('.qtty').textContent = qtty - 1;
+    parent.querySelector('.qtty').textContent = qtty - 1; // this shall be done through attribute of component!
   }
 
-  updateBasket2() // this shall be changed
+  updateBasket2() // TODO
 });
-
 
 // basket component was here
 
@@ -68,11 +68,16 @@ function updateBasket2() {
   let totalPrice = data.reduce((acc, a) => acc + a.qtty*a.price, 0);
   totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
 
-  let totalNumberDiv = document.getElementById('totalNumberDiv');
-  totalNumberDiv.textContent = 'Total number of items: ' + totalNumber;
+  //console.log(totalNumber);
+  //console.log(totalPrice);
 
-  let totalPriceDiv = document.getElementById('totalPriceDiv');
-  totalPriceDiv.textContent = 'Total Price: ' + totalPrice + ' $';
+  let basketEl = document.getElementsByTagName('basket-el')[0];
+  console.log(basketEl);
+  console.log("changing attributes of basket...")
+
+  basketEl.setAttribute('totalNumber', totalNumber); // attributChangedCallBack does not react to this (?!)
+  basketEl.setAttribute('totalPrice', totalPrice);   // attributChangedCallBack does not react to this (?!)
+  basketEl.setAttribute('test', 'foo'); // attributChangedCallBack DOES react to this
 }
 
 
@@ -96,29 +101,3 @@ function capitalizeFirstLetter(string) {
   renderBasket();
   render_list_of_items();
 })();
-
-// function addItem(event) {
-//   let parent = event.target.parentElement;
-//   console.log(parent);
-//   let name = parent.id;
-//   let item = data.find((item) => item.name === name);
-//   item.qtty += 1;
-//   let qtty = Number(parent.querySelector('.qtty').textContent);
-//   parent.querySelector('.qtty').textContent = qtty + 1;
-
-//   updateBasket();
-// }
-
-// function removeItem(event) {
-//   let parent = event.target.parentElement;
-//   let name = parent.id;
-//   let item = data.find((item) => item.name === name);
-//   if (item.qtty > 0) {
-//     item.qtty -= 1;
-//     // render new qtty
-//     let qtty = Number(parent.querySelector('.qtty').textContent);
-//     parent.querySelector('.qtty').textContent = qtty - 1;
-//   }
-
-//   updateBasket()
-// }
