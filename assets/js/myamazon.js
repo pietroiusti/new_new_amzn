@@ -11,67 +11,10 @@ var data = [
   {name: 'chipsahoy', price: 2.20, qtty: 0}
 ];
 
-class Item extends HTMLElement {
-  constructor() {
-    super();
-  }
-
-  connectedCallback() {
-    let name = this.getAttribute('name');
-    let price = this.getAttribute('price');
-    let imgSrc = this.getAttribute('imgSrc');
-    let qtty = this.getAttribute('qtty');
-
-    this.innerHTML = `
-        <div id="${name}" class="item">
-            <div class="name">
-                ${name}
-            </div>
-            <div class="price">
-                ${price}
-            </div>
-            <div class="imgDiv">
-                <img src="${imgSrc}">
-            </div>
-            <div class="qtty">
-                ${qtty}
-            </div>
-            <button id="remove${name}Button">-</button>
-            <button id="add${name}Button">+</button>
-        </div>
-    `;
-
-    document.getElementById(`add${name}Button`)
-      .addEventListener('click', (event) => {
-        this.handleClickAdd(event);
-      });
-
-    document.getElementById(`remove${name}Button`)
-      .addEventListener('click', (event) => {
-        this.handleClickRemove(event);
-      });
-  }
-
-  handleClickAdd(event) {
-    //console.log(event.target.parentElement.id);
-    //console.log(event.target);
-    const customEvent = new CustomEvent('add', { bubbles: true, detail: event.target.parentElement.id});
-    //console.log(customEvent);
-    event.target.dispatchEvent(customEvent);
-  }
-
-  handleClickRemove(event) {
-    //console.log(event.target.parentElement.id);
-    //console.log(event.target);
-    const customEvent = new CustomEvent('remove', { bubbles: true, detail: event.target.parentElement.id});
-    //console.log(customEvent);
-    event.target.dispatchEvent(customEvent);
-  }
-}
-customElements.define('list-el', Item);
+//card component was here...
 
 let itemList = document.getElementById('itemList');
-itemList.addEventListener('add', (e)=>{
+itemList.addEventListener('addItem', (e)=>{
   //console.log(e);
   let parent = e.target.parentElement;
   let name = parent.id;
@@ -80,9 +23,10 @@ itemList.addEventListener('add', (e)=>{
   let qtty = Number(parent.querySelector('.qtty').textContent);
   parent.querySelector('.qtty').textContent = qtty + 1;
 
-  updateBasket(); // this shall be changed
+  updateBasket2(); // this shall be changed
 });
-itemList.addEventListener('remove', (e)=>{
+
+itemList.addEventListener('removeItem', (e)=>{
   //console.log(e);
   let parent = event.target.parentElement;
   let name = parent.id;
@@ -94,7 +38,7 @@ itemList.addEventListener('remove', (e)=>{
     parent.querySelector('.qtty').textContent = qtty - 1;
   }
 
-  updateBasket() // this shall be changed
+  updateBasket2() // this shall be changed
 });
 
 
@@ -107,6 +51,10 @@ class Basket extends HTMLElement {
         <div id="totalNumberDiv">Total number of items: 0</div>
         <div id="totalPriceDiv">Total Price: 0.00 $</div>
     `;
+  }
+
+  attributeChangedCallback() {
+    console.log('hello world');
   }
 }
 customElements.define('basket-el', Basket);
@@ -130,31 +78,18 @@ function render_list_of_items() {
   }
 }
 
-function addItem(event) {
-  let parent = event.target.parentElement;
-  console.log(parent);
-  let name = parent.id;
-  let item = data.find((item) => item.name === name);
-  item.qtty += 1;
-  let qtty = Number(parent.querySelector('.qtty').textContent);
-  parent.querySelector('.qtty').textContent = qtty + 1;
+function updateBasket2() {
+  let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
+  let totalPrice = data.reduce((acc, a) => acc + a.qtty*a.price, 0);
+  totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
 
-  updateBasket();
+  let totalNumberDiv = document.getElementById('totalNumberDiv');
+  totalNumberDiv.textContent = 'Total number of items: ' + totalNumber;
+
+  let totalPriceDiv = document.getElementById('totalPriceDiv');
+  totalPriceDiv.textContent = 'Total Price: ' + totalPrice + ' $';
 }
 
-function removeItem(event) {
-  let parent = event.target.parentElement;
-  let name = parent.id;
-  let item = data.find((item) => item.name === name);
-  if (item.qtty > 0) {
-    item.qtty -= 1;
-    // render new qtty
-    let qtty = Number(parent.querySelector('.qtty').textContent);
-    parent.querySelector('.qtty').textContent = qtty - 1;
-  }
-
-  updateBasket()
-}
 
 function updateBasket() {
   let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
@@ -176,3 +111,29 @@ function capitalizeFirstLetter(string) {
   renderBasket();
   render_list_of_items();
 })();
+
+// function addItem(event) {
+//   let parent = event.target.parentElement;
+//   console.log(parent);
+//   let name = parent.id;
+//   let item = data.find((item) => item.name === name);
+//   item.qtty += 1;
+//   let qtty = Number(parent.querySelector('.qtty').textContent);
+//   parent.querySelector('.qtty').textContent = qtty + 1;
+
+//   updateBasket();
+// }
+
+// function removeItem(event) {
+//   let parent = event.target.parentElement;
+//   let name = parent.id;
+//   let item = data.find((item) => item.name === name);
+//   if (item.qtty > 0) {
+//     item.qtty -= 1;
+//     // render new qtty
+//     let qtty = Number(parent.querySelector('.qtty').textContent);
+//     parent.querySelector('.qtty').textContent = qtty - 1;
+//   }
+
+//   updateBasket()
+// }
