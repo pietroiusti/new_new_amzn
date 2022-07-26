@@ -13,6 +13,9 @@ var data = [
 
 //card component was here...
 
+
+// Make list of items (cards) listen to the custom events ('addItem'
+// and 'removeItem') emitted by the buttons.
 let itemList = document.getElementById('itemList');
 itemList.addEventListener('addItem', (e)=>{
   //console.log(e);
@@ -20,13 +23,13 @@ itemList.addEventListener('addItem', (e)=>{
   let name = parent.id;
   let item = data.find((item) => item.name === name);
   item.qtty += 1;
+  // render new qtty
   let qtty = Number(parent.querySelector('.qtty').textContent);
-
   parent.querySelector('.qtty').textContent = qtty + 1; // this shall be done through attribute of component!
 
-  updateBasket2(); // TODO
+  //updateBasket();
+  updateBasket2();
 });
-
 itemList.addEventListener('removeItem', (e)=>{
   //console.log(e);
   let parent = event.target.parentElement;
@@ -39,7 +42,8 @@ itemList.addEventListener('removeItem', (e)=>{
     parent.querySelector('.qtty').textContent = qtty - 1; // this shall be done through attribute of component!
   }
 
-  updateBasket2() // TODO
+  //updateBasket()
+  updateBasket2();
 });
 
 // basket component was here
@@ -68,16 +72,15 @@ function updateBasket2() {
   let totalPrice = data.reduce((acc, a) => acc + a.qtty*a.price, 0);
   totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
 
-  //console.log(totalNumber);
-  //console.log(totalPrice);
+  console.log(totalNumber);
+  console.log(totalPrice);
 
   let basketEl = document.getElementsByTagName('basket-el')[0];
   console.log(basketEl);
-  console.log("changing attributes of basket...")
+  //console.log("changing attributes of basket...")
 
-  basketEl.setAttribute('totalNumber', totalNumber); // attributChangedCallBack does not react to this (?!)
-  basketEl.setAttribute('totalPrice', totalPrice);   // attributChangedCallBack does not react to this (?!)
-  basketEl.setAttribute('test', 'foo'); // attributChangedCallBack DOES react to this
+  basketEl.setAttribute('items', totalNumber);
+  basketEl.setAttribute('price', totalPrice);   // attributChangedCallBack does not react to this (?!)
 }
 
 
