@@ -52,16 +52,43 @@ class Item extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['qtty'];
+    return ['qtty', ];
   }
 
   attributeChangedCallback(attrName, oldVal, newVal) {
-    // update view                       ************** TODO **********
+    //console.log('attributeChangedCallback in list-el!')
+
     if (attrName === 'qtty') {
-      let foo = document.getElementById(this.id);
-      console.log('I should change qtty using the component... but...')
-    } else {
-      console.log('??? '+ attrName);
+      this.qtty = newVal;
+
+      this.innerHTML = `
+        <div id="${this.name}" class="item">
+            <div class="name">
+                ${this.name}
+            </div>
+            <div class="price">
+                $ ${this.price}
+            </div>
+            <div class="imgDiv">
+                <img src="${this.imgSrc}">
+            </div>
+            <div class="qtty">
+                ${this.qtty}
+            </div>
+            <button id="remove${this.name}Button">-</button>
+            <button id="add${this.name}Button">+</button>
+        </div>
+    `;
+
+      document.getElementById(`add${this.name}Button`)
+        .addEventListener('click', (event) => {
+          this.handleClickAdd(event);
+        });
+
+      document.getElementById(`remove${this.name}Button`)
+        .addEventListener('click', (event) => {
+          this.handleClickRemove(event);
+        });
     }
   }
 }

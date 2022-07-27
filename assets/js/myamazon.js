@@ -20,10 +20,11 @@ itemList.addEventListener('addItem', (e)=>{
   let name = parent.id;
   let item = data.find((item) => item.name === name);
   item.qtty += 1;
-  // render new qtty
   let qtty = Number(parent.querySelector('.qtty').textContent);
-  parent.querySelector('.qtty').textContent = qtty + 1; // this shall be done through attribute of component! ***TODO***
 
+  // update card and basket
+  let customWrapper = parent.parentElement;
+  customWrapper.setAttribute('qtty', item.qtty);
   updateBasket();
 });
 itemList.addEventListener('removeItem', (e)=>{
@@ -33,9 +34,9 @@ itemList.addEventListener('removeItem', (e)=>{
   let item = data.find((item) => item.name === name);
   if (item.qtty > 0) {
     item.qtty -= 1;
-    // render new qtty
     let qtty = Number(parent.querySelector('.qtty').textContent);
-    parent.querySelector('.qtty').textContent = qtty - 1; // this shall be done through attribute of component! ***TODO***
+    let customWrapper = parent.parentElement;
+    customWrapper.setAttribute('qtty', item.qtty);
   }
 
   updateBasket()
@@ -84,4 +85,3 @@ function capitalizeFirstLetter(string) {
   renderBasket();
   render_list_of_items();
 })();
-
