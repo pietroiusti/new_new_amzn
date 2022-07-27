@@ -1,6 +1,7 @@
 class Item extends HTMLElement {
   constructor() {
     super();
+    this.qttyChanged = false;
     this.name = this.getAttribute('name');
     this.id = this.name+'Wrapper';
     this.price = this.getAttribute('price');
@@ -56,39 +57,15 @@ class Item extends HTMLElement {
   }
 
   attributeChangedCallback(attrName, oldVal, newVal) {
-    //console.log('attributeChangedCallback in list-el!')
-
     if (attrName === 'qtty') {
-      this.qtty = newVal;
+      if (this.qttyChanged == false) {
+        this.qttyChanged = true;
+        return;
+      }
 
-      this.innerHTML = `
-        <div id="${this.name}" class="item">
-            <div class="name">
-                ${this.name}
-            </div>
-            <div class="price">
-                $ ${this.price}
-            </div>
-            <div class="imgDiv">
-                <img src="${this.imgSrc}">
-            </div>
-            <div class="qtty">
-                ${this.qtty}
-            </div>
-            <button id="remove${this.name}Button">-</button>
-            <button id="add${this.name}Button">+</button>
-        </div>
-    `;
-
-      document.getElementById(`add${this.name}Button`)
-        .addEventListener('click', (event) => {
-          this.handleClickAdd(event);
-        });
-
-      document.getElementById(`remove${this.name}Button`)
-        .addEventListener('click', (event) => {
-          this.handleClickRemove(event);
-        });
+      let item = document.getElementById(this.name);
+      //item.querySelector(".class").textContent = newVal; //doesn't work for some reason...
+      item.children[3].textContent = newVal;
     }
   }
 }
