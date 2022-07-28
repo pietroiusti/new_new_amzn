@@ -4,15 +4,40 @@
 
 data = store.data;
 
-
 let componentsArray = []; // When a component is created is added here
 
 function handleDataChange(newData) {
-  console.log('I should handle the change in data');
-  console.log(newData);
+  //console.log('I should handle the change in data');
+  //console.log(newData);
 
+  // loop over components in componentsArray to update the relevant component
   for (let i = 0; i < componentsArray.length; i++) {
     //console.log(componentsArray[i]);// + 'should be updated if needed');
+    let component = componentsArray[i];
+
+    if (component.tagName == 'BASKET-EL') {
+      console.log(component.tagName);
+
+      let totalNumber = newData.reduce((acc, a) => acc + a.qtty, 0);
+      let totalPrice = newData.reduce((acc, a) => acc + a.qtty*a.price, 0);
+      totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
+
+      //let basketEl = document.getElementsByTagName('basket-el')[0];
+      //console.log(basketEl);
+      //console.log("changing attributes of basket...")
+
+      component.setAttribute('items', totalNumber);
+      component.setAttribute('price', totalPrice);
+    } else if (component.tagName == 'LIST-EL') {
+      console.log(component.tagName);
+    }
+
+
+    // let componentsAttributes = component.getAttributeNames();
+    // console.log('component:')
+    // console.log(component)
+    // console.log('componentsAttributes:');
+    // console.log(componentsAttributes);
   }
 }
 
@@ -35,7 +60,7 @@ itemList.addEventListener('addItem', (e)=>{
   // update card and basket
   let customWrapper = parent.parentElement;
   customWrapper.setAttribute('qtty', item.qtty);
-  updateBasket();
+  // updateBasket(); // TESTING: NOW HANDLED BY STORE?
 });
 itemList.addEventListener('removeItem', (e)=>{
   //console.log(e);
@@ -53,7 +78,7 @@ itemList.addEventListener('removeItem', (e)=>{
     customWrapper.setAttribute('qtty', item.qtty);
   }
 
-  updateBasket()
+  //updateBasket() // TESTING: NOW HANDLED BY STORE?
 });
 
 function renderBasket() {
