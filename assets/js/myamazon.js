@@ -3,7 +3,7 @@
 // #########################################################
 
 data = store.data;
-
+/*
 let componentsArray = []; // When a component is created is added here
 
 function handleDataChange(newData) {
@@ -12,18 +12,19 @@ function handleDataChange(newData) {
     let component = componentsArray[i];
 
     if (component.tagName == 'BASKET-EL') {
-      let totalNumber = newData.reduce((acc, a) => acc + a.qtty, 0);
-      let totalPrice = newData.reduce((acc, a) => acc + a.qtty*a.price, 0);
-      totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
+      // let totalNumber = newData.reduce((acc, a) => acc + a.qtty, 0);
+      // let totalPrice = newData.reduce((acc, a) => acc + a.qtty*a.price, 0);
+      // totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
 
-      component.setAttribute('items', totalNumber);
-      component.setAttribute('price', totalPrice);
+      // component.setAttribute('items', totalNumber);
+      // component.setAttribute('price', totalPrice);
     } else if (component.tagName == 'LIST-EL') {
       //let item = newData.find((item) => item.name === component.name); // NOW
       //component.setAttribute('qtty', item.qtty);                       // USING REGISTERED LISTENERS!
     }
   }
 }
+*/
 
 // Make list of items (cards) listen to the custom events ('addItem'
 // and 'removeItem') emitted by the buttons.
@@ -33,7 +34,8 @@ itemList.addEventListener('addItem', (e)=>{
   let name = parent.id;
   let item = data.find((item) => item.name === name);
 
-  store.change({action: 'addItem', itemName: name}, handleDataChange);
+  //store.change({action: 'addItem', itemName: name}, handleDataChange);
+  store.change({action: 'addItem', itemName: name});
 });
 
 itemList.addEventListener('removeItem', (e)=>{
@@ -41,14 +43,15 @@ itemList.addEventListener('removeItem', (e)=>{
   let name = parent.id;
   let item = data.find((item) => item.name === name);
   if (item.qtty > 0) {
-    store.change({action: 'removeItem', itemName: name}, handleDataChange);
+    //store.change({action: 'removeItem', itemName: name}, handleDataChange);
+    store.change({action: 'removeItem', itemName: name});
   }
 });
 
 function renderBasket() {
   let basketDiv = document.getElementById('basketDiv');
   let basket = document.createElement('basket-el');
-  componentsArray.push(basket);
+  //componentsArray.push(basket);
   basketDiv.appendChild(basket);
 }
 
@@ -57,7 +60,7 @@ function render_list_of_items() {
   for (let i = 0; i < data.length; i++) {
     let name = data[i].name;
     let item = document.createElement('list-el');
-    componentsArray.push(item);
+    //componentsArray.push(item);
     item.setAttribute('name', name);
     item.setAttribute('price', data[i].price);
     item.setAttribute('imgSrc', `./assets/img/${name}.jpg`);

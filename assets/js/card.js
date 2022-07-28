@@ -74,16 +74,8 @@ class Item extends HTMLElement {
 
 customElements.define('list-el', Item);
 
-store.registerListener(function listElCallback(data, obj) { // <========================
-  //console.log('Card Listener says hello');
-  //console.log(data);
-  //console.log(obj); // =>  {action: 'addItem', itemName: 'caffelatte'}
-
-  let customEl = document.getElementById(obj.itemName).parentElement;
-  let item = data.find((item) => item.name === obj.itemName);
-  //console.log(item);
-  customEl.setAttribute('qtty', item.qtty);
-
-  // let item = data.find((item) => item.name === component.name);
-  // component.setAttribute('qtty', item.qtty);
+store.registerListener(function listElCallback(data, obj) {
+  let listEl = document.getElementById(obj.itemName).parentElement;
+  let updatedQtty = data.find(item => item.name === obj.itemName).qtty;
+  listEl.setAttribute('qtty', updatedQtty);
 });

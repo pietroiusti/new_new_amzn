@@ -30,7 +30,7 @@ let store = {
       }
     }
 
-    cb(data); // this should be replace by a call to all listeners in the dataChangeListeners array
+    //cb(data); // this should be replace by a call to all listeners in the dataChangeListeners array
 
     // TESTING call each functions in dataListeners passing updated data
     for (f of store.dataChangeListeners) {
