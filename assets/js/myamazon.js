@@ -16,7 +16,7 @@ function handleDataChange(newData) {
     let component = componentsArray[i];
 
     if (component.tagName == 'BASKET-EL') {
-      console.log(component.tagName);
+      //console.log(component.tagName);
 
       let totalNumber = newData.reduce((acc, a) => acc + a.qtty, 0);
       let totalPrice = newData.reduce((acc, a) => acc + a.qtty*a.price, 0);
@@ -29,9 +29,12 @@ function handleDataChange(newData) {
       component.setAttribute('items', totalNumber);
       component.setAttribute('price', totalPrice);
     } else if (component.tagName == 'LIST-EL') {
-      console.log(component.tagName);
+      //console.log(component.name);
+      let item = newData.find((item) => item.name === component.name);
+      //console.log(item);
+      //console.log(item.qtty);
+      component.setAttribute('qtty', item.qtty);
     }
-
 
     // let componentsAttributes = component.getAttributeNames();
     // console.log('component:')
@@ -53,14 +56,15 @@ itemList.addEventListener('addItem', (e)=>{
   //item.qtty += 1; // <======================================== this is
                   // a change in state that is now be performed
                   // through a call to store.change().
-  store.change({action: 'addItem', itemName: name}, handleDataChange); // TESTING
+  store.change({action: 'addItem', itemName: name}, handleDataChange); // NEW
 
-  let qtty = Number(parent.querySelector('.qtty').textContent);
+
 
   // update card and basket
-  let customWrapper = parent.parentElement;
-  customWrapper.setAttribute('qtty', item.qtty);
-  // updateBasket(); // TESTING: NOW HANDLED BY STORE?
+  //let qtty = Number(parent.querySelector('.qtty').textContent);
+  //let customWrapper = parent.parentElement;
+  //customWrapper.setAttribute('qtty', item.qtty); // TESTING: NOW HANDLED BY STORE/HANDLEDATACHANGE?
+  // updateBasket(); // TESTING: NOW HANDLED BY STORE/HANDLEDATACHANGE?
 });
 itemList.addEventListener('removeItem', (e)=>{
   //console.log(e);
@@ -71,14 +75,14 @@ itemList.addEventListener('removeItem', (e)=>{
     //item.qtty -= 1; // <======================================== this is
                   // a change in state that is now be performed
                   // through a call to store.change().
-    store.change({action: 'removeItem', itemName: name}, handleDataChange); // TESTING
+    store.change({action: 'removeItem', itemName: name}, handleDataChange); // NEW
 
-    let qtty = Number(parent.querySelector('.qtty').textContent);
-    let customWrapper = parent.parentElement;
-    customWrapper.setAttribute('qtty', item.qtty);
+    //let qtty = Number(parent.querySelector('.qtty').textContent);
+    //let customWrapper = parent.parentElement;
+    //customWrapper.setAttribute('qtty', item.qtty); //TESTING: NOW HANDLED BY STORE/HANDLEDATACHANGE?
   }
 
-  //updateBasket() // TESTING: NOW HANDLED BY STORE?
+  //updateBasket() // TESTING: NOW HANDLED BY STORE/HANDLEDATACHANGE?
 });
 
 function renderBasket() {
