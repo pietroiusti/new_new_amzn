@@ -12,8 +12,7 @@ let store = {
           {name: 'chipsahoy', price: 2.20, qtty: 0},
         ],
 
-  // Change data according to action.
-  // cb can be passed to act upon the new state.
+  // Change store.data according to action.
   change: (obj, cb) => {
     let data = store.data;
     if (obj.action === 'addItem') {
@@ -29,16 +28,14 @@ let store = {
         item.qtty -= 1;
       }
     }
-
-    //cb(data); // this should be replace by a call to all listeners in the dataChangeListeners array
-
-    // TESTING call each functions in dataListeners passing updated data
+    // Call each listener in dataListeners passing updated data and
+    // the obj received
     for (f of store.dataChangeListeners) {
       f(data, obj);
     }
   },
 
-  registerListener: (f) => { // Add to dataListeners all the listener
+  registerListener: (f) => { // Add callback function to dataListeners
     store.dataChangeListeners.push(f);
   }
 };

@@ -23,7 +23,6 @@ class Basket extends HTMLElement {
 
   attributeChangedCallback(name, oldVal, newVal) {
     // update view
-    //console.log('name: ' + name);
     if (name === 'items') {
       document.getElementById('totalNumberDiv').innerHTML = 'Total number of items: ' + newVal;
     } else if (name === 'price') {
