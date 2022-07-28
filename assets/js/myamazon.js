@@ -1,15 +1,20 @@
-var data = [
-  {name: 'benjerry', price: 5.95, qtty: 0},
-  {name: 'caffelatte', price: 1.27, qtty: 0},
-  {name: 'calippo', price: 4.10, qtty: 0},
-  {name: 'evax', price: 2.40, qtty: 0},
-  {name: 'pizza', price: 4.95, qtty: 0},
-  {name: 'scottex', price: 4.50, qtty: 0},
-  {name: 'spaghetti', price: 1.25, qtty: 0},
-  {name: 'triangulos', price: 2.35, qtty: 0},
-  {name: 'xibeca', price: 3.75, qtty: 0},
-  {name: 'chipsahoy', price: 2.20, qtty: 0}
-];
+// #########################################################
+// This file assumes the existence of a global variable called {...} storing {...}
+// #########################################################
+
+data = store.data;
+
+
+let componentsArray = []; // When a component is created is added here
+
+function handleDataChange(newData) {
+  console.log('I should handle the change in data');
+  console.log(newData);
+
+  for (let i = 0; i < componentsArray.length; i++) {
+    //console.log(componentsArray[i]);// + 'should be updated if needed');
+  }
+}
 
 // Make list of items (cards) listen to the custom events ('addItem'
 // and 'removeItem') emitted by the buttons.
@@ -19,7 +24,12 @@ itemList.addEventListener('addItem', (e)=>{
   let parent = e.target.parentElement;
   let name = parent.id;
   let item = data.find((item) => item.name === name);
-  item.qtty += 1;
+
+  //item.qtty += 1; // <======================================== this is
+                  // a change in state that is now be performed
+                  // through a call to store.change().
+  store.change({action: 'addItem', itemName: name}, handleDataChange); // TESTING
+
   let qtty = Number(parent.querySelector('.qtty').textContent);
 
   // update card and basket
@@ -33,7 +43,11 @@ itemList.addEventListener('removeItem', (e)=>{
   let name = parent.id;
   let item = data.find((item) => item.name === name);
   if (item.qtty > 0) {
-    item.qtty -= 1;
+    //item.qtty -= 1; // <======================================== this is
+                  // a change in state that is now be performed
+                  // through a call to store.change().
+    store.change({action: 'removeItem', itemName: name}, handleDataChange); // TESTING
+
     let qtty = Number(parent.querySelector('.qtty').textContent);
     let customWrapper = parent.parentElement;
     customWrapper.setAttribute('qtty', item.qtty);
@@ -45,6 +59,7 @@ itemList.addEventListener('removeItem', (e)=>{
 function renderBasket() {
   let basketDiv = document.getElementById('basketDiv');
   let basket = document.createElement('basket-el');
+  componentsArray.push(basket); // <=================================
   basketDiv.appendChild(basket);
 }
 
@@ -53,6 +68,7 @@ function render_list_of_items() {
   for (let i = 0; i < data.length; i++) {
     let name = data[i].name;
     let item = document.createElement('list-el');
+    componentsArray.push(item); // <=================================
     item.setAttribute('name', name);
     item.setAttribute('price', data[i].price);
     item.setAttribute('imgSrc', `./assets/img/${name}.jpg`);

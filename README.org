@@ -1,3 +1,6 @@
+* Original task
+Task:
+#+begin_quote
 El objetivo de este ejercicio es programar con javascript un
 "ecommerce".
 
@@ -26,3 +29,17 @@ que consideres interesantes, p.ej.  - Algún tipo de visualización del
 contenido de la cesta.  - Listado/menú/cesta adaptable a móbil.  -
 Persistencia del carrito en localStorage.  - Uso de WebComponents - o
 cualquier otra cosa que te parezca interesante !
+#+end_quote
+
+* First implementation
+
+* After the first implementation: using web components
+We can turn the items in the grid and the basket into components. We
+will turn them into ``custom elements''
+
+* A futher step: data flow
+
+Now: [...]
+
+What we want: [...]
+
