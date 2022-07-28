@@ -1,3 +1,9 @@
+#+title: Readme IN PROGRESS
+#+language: en
+#+creator: Emacs 28.1 (Org mode 9.5.2)
+
+
+
 * Original task
 Task:
 #+begin_quote
@@ -34,12 +40,46 @@ cualquier otra cosa que te parezca interesante !
 * First implementation
 
 * After the first implementation: using web components
-We can turn the items in the grid and the basket into components. We
-will turn them into ``custom elements''
+We can turn the items in the grid and the basket into /custom
+elements/.
 
 * A futher step: data flow
+- Now:
 
-Now: [...]
+  click -> dispactch custom event -> myamazon.js --> store update
+                                                                     |
+                                                                     v
+                                                           attribute change
+                                                                     |
+                                                                     v
+                                                            update view
 
-What we want: [...]
+- What we want:
 
+  click -> dispatch custom event -> myamazon.js -> store update ->
+  myamazon.js -> upate view
+
+
+* Another improvement: really disconnecting changing the state and reacting to the state change
+Now we are passing a callback to the store, when we change the state:
+#+begin_src js
+  store.change({action: 'removeItem', itemName: name}, handleDataChange);
+#+end_src
+
+Now we have only two components.
+
+It would be nice to allow components to register their listeners
+(callbacks) in the store. If components register their own listeners,
+then we can update the state without passing a callback.
+
+Each time the store is changed, then we will execute all the
+listeners.
+
+* Exercise: making the basket ``stateful''.
+Now that, instead of passing a callback to the store, we are
+registering listeners independently of when they changes to the store
+are performed, we can, as an exercise, turn the basket into a
+/stateful/ (``smart'') component.
+
+Now the basket is /stateless/ (``dumb''), that is, it depends only on
+its input. We can turn it into ``stateful''
