@@ -1,4 +1,5 @@
 let store = {
+  dataChangeListeners: [ ], // array of callbacks
   data: [ {name: 'benjerry', price: 5.95, qtty: 0},
           {name: 'caffelatte', price: 1.27, qtty: 0},
           {name: 'calippo', price: 4.10, qtty: 0},
@@ -17,7 +18,7 @@ let store = {
     let data = store.data;
     if (obj.action === 'addItem') {
       console.log('store: adding 1 ' + obj.itemName + ' to the basket');
-      // change store.data      
+      // change store.data
       let item = data.find((item)=> item.name === obj.itemName);
       item.qtty += 1;
     } else if (obj.action === 'removeItem') {
@@ -28,10 +29,18 @@ let store = {
         item.qtty -= 1;
       }
     }
-    
-    // handle change in data
-    cb(data);
+
+    cb(data); // this should be replace by a call to all listeners in the dataChangeListeners array
+
+    // TESTING call each functions in dataListeners passing updated data
+    for (f of store.dataChangeListeners) {
+      f(data, obj);
+    }
   },
+
+  registerListener: (f) => { // Add to dataListeners all the listener
+    store.dataChangeListeners.push(f);
+  }
 };
 // Example:
 // store.change({action: 'addItem', item: 'pizza'}, (data) => {

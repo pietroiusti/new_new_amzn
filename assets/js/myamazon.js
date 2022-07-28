@@ -19,8 +19,8 @@ function handleDataChange(newData) {
       component.setAttribute('items', totalNumber);
       component.setAttribute('price', totalPrice);
     } else if (component.tagName == 'LIST-EL') {
-      let item = newData.find((item) => item.name === component.name);
-      component.setAttribute('qtty', item.qtty);
+      //let item = newData.find((item) => item.name === component.name); // NOW
+      //component.setAttribute('qtty', item.qtty);                       // USING REGISTERED LISTENERS!
     }
   }
 }
@@ -29,7 +29,6 @@ function handleDataChange(newData) {
 // and 'removeItem') emitted by the buttons.
 let itemList = document.getElementById('itemList');
 itemList.addEventListener('addItem', (e)=>{
-  //console.log(e);
   let parent = e.target.parentElement;
   let name = parent.id;
   let item = data.find((item) => item.name === name);

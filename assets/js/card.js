@@ -1,7 +1,11 @@
+// #########################################################
+// This file assumes the existence of a `store` global variable
+// #########################################################
+
 class Item extends HTMLElement {
   constructor() {
     super();
-    this.qttyChanged = false;
+    this.connectedCallbackHasBeenCalled = false;
     this.name = this.getAttribute('name');
     this.id = this.name+'Wrapper';
     this.price = this.getAttribute('price');
@@ -10,6 +14,7 @@ class Item extends HTMLElement {
   }
 
   connectedCallback() {
+    this.connectedCallbackHasBeenCalled = true;
     this.innerHTML = `
         <div id="${this.name}" class="item">
             <div class="name">
@@ -57,16 +62,28 @@ class Item extends HTMLElement {
   }
 
   attributeChangedCallback(attrName, oldVal, newVal) {
-    if (attrName === 'qtty') {
-      if (this.qttyChanged == false) {
-        this.qttyChanged = true;
-        return;
-      }
+    if (!this.connectedCallbackHasBeenCalled)
+      return;
 
+    if (attrName === 'qtty') {
       let item = document.getElementById(this.name);
-      //item.querySelector(".class").textContent = newVal; //doesn't work for some reason...
       item.children[3].textContent = newVal;
     }
   }
 }
+
 customElements.define('list-el', Item);
+
+store.registerListener(function listElCallback(data, obj) { // <========================
+  //console.log('Card Listener says hello');
+  //console.log(data);
+  //console.log(obj); // =>  {action: 'addItem', itemName: 'caffelatte'}
+
+  let customEl = document.getElementById(obj.itemName).parentElement;
+  let item = data.find((item) => item.name === obj.itemName);
+  //console.log(item);
+  customEl.setAttribute('qtty', item.qtty);
+
+  // let item = data.find((item) => item.name === component.name);
+  // component.setAttribute('qtty', item.qtty);
+});
