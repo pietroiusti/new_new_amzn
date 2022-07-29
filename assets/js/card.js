@@ -68,24 +68,16 @@ class Item extends HTMLElement {
     buttonRemove.setAttribute('id', 'remove'+this.name+'Button');
     let buttonRemoveText = document.createTextNode('-');
     buttonRemove.appendChild(buttonRemoveText);
+    buttonRemove.addEventListener('click', e => this.handleClickRemove(e));
     item.appendChild(buttonRemove);
     let buttonAdd = document.createElement('button');
     buttonAdd.setAttribute('id', 'add'+this.name+'Button');
     let buttonAddText = document.createTextNode('+');
     buttonAdd.appendChild(buttonAddText);
+    buttonAdd.addEventListener('click', e => this.handleClickAdd(e));
     item.appendChild(buttonAdd);
 
     this.append(item);
-
-    document.getElementById(`add${this.name}Button`)
-      .addEventListener('click', (event) => {
-        this.handleClickAdd(event);
-      });
-
-    document.getElementById(`remove${this.name}Button`)
-      .addEventListener('click', (event) => {
-        this.handleClickRemove(event);
-      });
   }
 
   handleClickAdd(event) {
