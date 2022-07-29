@@ -8,10 +8,22 @@ class Basket extends HTMLElement {
   }
 
   connectedCallback() {
-    this.innerHTML = `
-        <div id="totalNumberDiv">Total number of items: 0</div>
-        <div id="totalPriceDiv">Total Price: 0.00 $</div>
-    `;
+    // OLD:
+    // this.innerHTML = `
+    //     <div id="totalNumberDiv">Total number of items: 0</div>
+    //     <div id="totalPriceDiv">Total Price: 0.00 $</div>
+    // `;
+    // USE DOM MANIPULATION INSTEAD:
+    let totalNumberDiv = document.createElement('div');
+    let totalNumberDivText = document.createTextNode('Total number of items: 0');
+    totalNumberDiv.appendChild(totalNumberDivText);
+
+    let totalPriceDiv = document.createElement('div');
+    let totalPriceDivText = document.createTextNode('Total Price: 0.00 $');
+    totalPriceDiv.appendChild(totalPriceDivText);
+
+    this.appendChild(totalNumberDiv);
+    this.appendChild(totalPriceDiv);
   }
 }
 
