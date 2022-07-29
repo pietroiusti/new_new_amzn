@@ -17,7 +17,9 @@ class Basket extends HTMLElement {
 
 customElements.define('basket-el', Basket);
 
-store.registerListener(function basketElCallback(data) {
+store.registerListener(basketElCallback);
+
+function basketElCallback(data) {
   let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
   let totalPrice = data.reduce((acc, a) => acc + a.qtty*a.price, 0);
   totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
@@ -25,4 +27,4 @@ store.registerListener(function basketElCallback(data) {
   basket = document.getElementsByTagName('basket-el')[0];
   basket.children[0].textContent = 'Total number of items: ' + totalNumber;
   basket.children[1].textContent = 'Total Price: ' + totalPrice + '$';
-});
+}
