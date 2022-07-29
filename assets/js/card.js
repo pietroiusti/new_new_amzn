@@ -15,24 +15,67 @@ class Item extends HTMLElement {
 
   connectedCallback() {
     this.connectedCallbackHasBeenCalled = true;
-    this.innerHTML = `
-        <div id="${this.name}" class="item">
-            <div class="name">
-                ${this.name}
-            </div>
-            <div class="price">
-                $ ${this.price}
-            </div>
-            <div class="imgDiv">
-                <img src="${this.imgSrc}">
-            </div>
-            <div class="qtty">
-                ${this.qtty}
-            </div>
-            <button id="remove${this.name}Button">-</button>
-            <button id="add${this.name}Button">+</button>
-        </div>
-    `;
+    // OLD:
+    // this.innerHTML = `
+    //     <div id="${this.name}" class="item">
+    //         <div class="name">
+    //             ${this.name}
+    //         </div>
+    //         <div class="price">
+    //             $ ${this.price}
+    //         </div>
+    //         <div class="imgDiv">
+    //             <img src="${this.imgSrc}">
+    //         </div>
+    //         <div class="qtty">
+    //             ${this.qtty}
+    //         </div>
+    //         <button id="remove${this.name}Button">-</button>
+    //         <button id="add${this.name}Button">+</button>
+    //     </div>
+    // `;
+    // USE DOM MANIPULATION INSTEAD:
+    let item = document.createElement('div');
+    item.setAttribute('id', this.name);
+    item.setAttribute('class', 'item');
+
+    let name = document.createElement('div');
+    name.setAttribute('class', this.name);
+    let nameText = document.createTextNode(this.name);
+    name.appendChild(nameText);
+    item.appendChild(name);
+
+    let price = document.createElement('div');
+    price.setAttribute('class', 'price');
+    let priceText = document.createTextNode(this.price);
+    price.appendChild(priceText);
+    item.appendChild(price);
+
+    let imgDiv = document.createElement('div');
+    imgDiv.setAttribute('class', 'imgDiv');
+    let img = document.createElement('img');
+    img.setAttribute('src', this.imgSrc);
+    imgDiv.appendChild(img);
+    item.appendChild(imgDiv);
+
+    let qtty = document.createElement('div');
+    qtty.setAttribute('class', 'qtty');
+    let qttyText = document.createTextNode(this.qtty);
+    qtty.appendChild(qttyText);
+    item.appendChild(qtty);
+
+    let buttonRemove = document.createElement('button');
+    buttonRemove.setAttribute('id', 'remove'+this.name+'Button');
+    let buttonRemoveText = document.createTextNode('-');
+    buttonRemove.appendChild(buttonRemoveText);
+    item.appendChild(buttonRemove);
+    let buttonAdd = document.createElement('button');
+    buttonAdd.setAttribute('id', 'add'+this.name+'Button');
+    let buttonAddText = document.createTextNode('+');
+    buttonAdd.appendChild(buttonAddText);
+    item.appendChild(buttonAdd);
+
+    this.append(item);
 
     document.getElementById(`add${this.name}Button`)
       .addEventListener('click', (event) => {
