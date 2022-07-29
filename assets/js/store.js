@@ -13,7 +13,7 @@ let store = {
         ],
 
   // Change store.data according to action.
-  change: (obj, cb) => {
+  change: (obj) => {
     let data = store.data;
     if (obj.action === 'addItem') {
       console.log('store: adding 1 ' + obj.itemName + ' to the basket');

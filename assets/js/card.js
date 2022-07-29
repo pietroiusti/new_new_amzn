@@ -1,7 +1,3 @@
-// #########################################################
-// This file assumes the existence of a `store` global variable
-// #########################################################
-
 class Item extends HTMLElement {
   constructor() {
     super();
@@ -108,12 +104,3 @@ class Item extends HTMLElement {
 }
 
 customElements.define('list-el', Item);
-
-store.registerListener(listElCallback);
-
-function listElCallback(data, obj) {
-  let listEl = document.getElementById(obj.itemName).parentElement;
-  let updatedQtty = data.find(item => item.name === obj.itemName).qtty;
-  listEl.setAttribute('qtty', updatedQtty);
-}
-

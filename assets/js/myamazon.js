@@ -44,6 +44,14 @@ function render_list_of_items() {
   }
 }
 
+store.registerListener(listElCallback);
+
+function listElCallback(data, obj) {
+  let listEl = document.getElementById(obj.itemName).parentElement;
+  let updatedQtty = data.find(item => item.name === obj.itemName).qtty;
+  listEl.setAttribute('qtty', updatedQtty);
+}
+
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
