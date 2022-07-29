@@ -21,7 +21,7 @@ let store = {
       let item = data.find((item)=> item.name === obj.itemName);
       item.qtty += 1;
     } else if (obj.action === 'removeItem') {
-      console.log('store: removing 1' + obj.itemName + ' to the basket');
+      console.log('store: removing 1 ' + obj.itemName + ' to the basket');
       // change store.data
       let item = data.find((item)=> item.name === obj.itemName);
       if (item.qtty > 0) {
