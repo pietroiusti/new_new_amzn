@@ -83,3 +83,16 @@ are performed, we can, as an exercise, turn the basket into a
 
 Now the basket is /stateless/ (``dumb''), that is, it depends only on
 its input. We can turn it into ``stateful''
+
+* Using a bundler. Introducing Webpack
+Now we are loading loading several js files, using the ~<script>~
+tags.
+
+There are implicit dependencies between those files: the files
+basket.js and myamazon.js assume the existence of a `store` global
+variable, which is provided by store.js. This is not ideal:
+- the script tags for those files must be placed in the right order;
+- it's not obvious that some scripts depend on others;
+- if a dependency is included but not used, we will load unnecessary
+  code
+
