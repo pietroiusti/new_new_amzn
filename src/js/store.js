@@ -1,3 +1,30 @@
+'use strict';
+
+console.log('store.js');
+
+
+/* todo: make store more general. Draft:
+let store2 = {
+  listeners: {},// {data(Listeners): []}
+
+  properties: {}, //{data:...,}
+
+  register: (prop, cb) => {
+    listeners[prop].push(cb);
+  },  
+
+  get: (prop) => properties[prop],
+
+  set: (prop, newVal) => {
+    properties[prop] = newVal;
+    for (let f of listeners[prop]) {
+      f(newVal);
+    }
+  }
+}
+store2.register('data', ()=>{});
+*/
+
 let store = {
   dataChangeListeners: [ ], // array of callbacks
   data: [ {name: 'benjerry', price: 5.95, qtty: 0},
@@ -28,14 +55,17 @@ let store = {
         item.qtty -= 1;
       }
     }
+
+
     // Call each listener in dataListeners passing updated data and
     // the obj received
-    for (f of store.dataChangeListeners) {
+    for (let f of store.dataChangeListeners) { // DOESN'T WORK ANYMORE?!
       f(data, obj);
     }
   },
 
   registerListener: (f) => { // Add callback function to dataListeners
+    //console.log('registering' + f);
     store.dataChangeListeners.push(f);
   }
 };
@@ -43,3 +73,5 @@ let store = {
 // store.change({action: 'addItem', item: 'pizza'}, (data) => {
 //   console.log(data);
 // });
+
+export default store;

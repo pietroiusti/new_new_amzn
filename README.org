@@ -96,3 +96,17 @@ variable, which is provided by store.js. This is not ideal:
 - if a dependency is included but not used, we will load unnecessary
   code
 
+Let's use Webpack.
+
+We gotta do a bunch of stuff
+(cf. https://webpack.js.org/guides/getting-started/). Among which:
+#+begin_src
+npm init -y
+
+npm install webpack-cli --save-dev
+
+npm install --save-dev style-loader css-loader
+
+...
+#+end_src
+

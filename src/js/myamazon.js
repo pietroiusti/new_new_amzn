@@ -1,13 +1,27 @@
-// #########################################################
-// This file assumes the existence of a `store` global variable
-// #########################################################
+console.log('myamazon.js');
 
-data = store.data;
+import store from './store.js';
+//import './store.js';
+
+//import Basket from './basket.js';
+import './basket.js';
+//customElements.define('basket-el', Basket);
+
+//import Item from './card.js';
+import './card.js';
+//customElements.define('list-el', Item);
+
+import '../css/myamazon.css';
+
+
+let data = store.data;
+//console.log(data);
 
 // Make list of items (cards) listen to the custom events ('addItem'
 // and 'removeItem') emitted by the buttons.
 let itemList = document.getElementById('itemList');
 itemList.addEventListener('addItem', (e)=>{
+  console.log('itemList event listener');
   let parent = e.target.parentElement;
   let name = parent.id;
   let item = data.find((item) => item.name === name);
@@ -38,7 +52,7 @@ function render_list_of_items() {
 
     item.setAttribute('name', name);
     item.setAttribute('price', data[i].price);
-    item.setAttribute('imgSrc', `./assets/img/${name}.jpg`);
+    item.setAttribute('imgSrc', `../src/img/${name}.jpg`);
     item.setAttribute('qtty', data[i].qtty);
     itemList.appendChild(item);
   }
@@ -47,6 +61,7 @@ function render_list_of_items() {
 store.registerListener(listElCallback);
 
 function listElCallback(data, obj) {
+  console.log('listElCallback');
   let listEl = document.getElementById(obj.itemName).parentElement;
   let updatedQtty = data.find(item => item.name === obj.itemName).qtty;
   listEl.setAttribute('qtty', updatedQtty);

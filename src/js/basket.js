@@ -1,6 +1,7 @@
-// #########################################################
-// This file assumes the existence of a `store` global variable
-// #########################################################
+console.log('basket.js');
+
+import store from './store.js';
+//import './store.js';
 
 class Basket extends HTMLElement {
   constructor() {
@@ -39,3 +40,5 @@ class Basket extends HTMLElement {
 }
 
 customElements.define('basket-el', Basket);
+
+//export default Basket;

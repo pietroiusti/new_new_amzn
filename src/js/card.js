@@ -1,16 +1,25 @@
+console.log('card.js');
+
 class Item extends HTMLElement {
   constructor() {
     super();
     this.connectedCallbackHasBeenCalled = false;
+    // this.name = this.getAttribute('name');
+    // this.id = this.name+'Wrapper';
+    // this.price = this.getAttribute('price');
+    // this.imgSrc = this.getAttribute('imgSrc');
+    // this.qtty = this.getAttribute('qtty');
+  }
+
+  connectedCallback() {
+    this.connectedCallbackHasBeenCalled = true;
+
     this.name = this.getAttribute('name');
     this.id = this.name+'Wrapper';
     this.price = this.getAttribute('price');
     this.imgSrc = this.getAttribute('imgSrc');
     this.qtty = this.getAttribute('qtty');
-  }
-
-  connectedCallback() {
-    this.connectedCallbackHasBeenCalled = true;
+    
     // OLD:
     // this.innerHTML = `
     //     <div id="${this.name}" class="item">
@@ -78,6 +87,7 @@ class Item extends HTMLElement {
 
   handleClickAdd(event) {
     //event.target => button
+    console.log('button');
     const customEvent = new CustomEvent('addItem', { bubbles: true });
     event.target.dispatchEvent(customEvent);
   }
@@ -104,3 +114,5 @@ class Item extends HTMLElement {
 }
 
 customElements.define('list-el', Item);
+
+//export default Item;
