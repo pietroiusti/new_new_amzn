@@ -2,12 +2,38 @@
 
 console.log('store.js');
 
+class Store2 {
+  constructor(listeners, properties) {
+    this.listeners = listeners;
+    this.properties = properties;
+    console.log(this.properties);
+  }
+  
+  register(prop, cb) {
+    if (!this.listeners[prop])
+      this.listeners[prop] = [];
+    
+    this.listeners[prop].push(cb);
+  }
 
-/* todo: make store more general. Draft:
+  get(prop) {
+    return this.properties[prop].slice(); // return copy
+  }
+
+  set(prop, newVal) {
+    this.properties[prop] = newVal;
+    for (let f of this.listeners[prop]) {
+      f(newVal);
+    }
+  }
+}
+
+/*
+//In progress: make store more general. Draft:
 let store2 = {
-  listeners: {},// {data(Listeners): []}
+  listeners: {}, // { data(Listeners): [], ...}
 
-  properties: {}, //{data:...,}
+  properties: {}, //{data: ..., }
 
   register: (prop, cb) => {
     listeners[prop].push(cb);
@@ -22,8 +48,10 @@ let store2 = {
     }
   }
 }
+// example:
 store2.register('data', ()=>{});
 */
+
 
 let store = {
   dataChangeListeners: [ ], // array of callbacks
@@ -74,4 +102,5 @@ let store = {
 //   console.log(data);
 // });
 
-export default store;
+//export default store;
+export default Store2;

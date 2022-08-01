@@ -1,12 +1,15 @@
+// This file assumes the existence of `store` global variable
+
 console.log('basket.js');
 
-import store from './store.js';
-//import './store.js';
+//import store from './store.js';
+//import Store2 from './store.js';
 
 class Basket extends HTMLElement {
   constructor() {
     super();
-    store.registerListener(this.basketElCallback);
+    //store.registerListener(this.basketElCallback); // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    store.register('data', this.basketElCallback);
   }
 
   connectedCallback() {
@@ -29,13 +32,14 @@ class Basket extends HTMLElement {
   }
 
   basketElCallback(data) {
-    let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
-    let totalPrice = data.reduce((acc, a) => acc + a.qtty*a.price, 0);
-    totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
+    console.log('basketElCallback');
+    // let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
+    // let totalPrice = data.reduce((acc, a) => acc + a.qtty*a.price, 0);
+    // totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
 
-    let basket = document.getElementsByTagName('basket-el')[0];
-    basket.children[0].textContent = 'Total number of items: ' + totalNumber;
-    basket.children[1].textContent = 'Total Price: ' + totalPrice + '$';
+    // let basket = document.getElementsByTagName('basket-el')[0];
+    // basket.children[0].textContent = 'Total number of items: ' + totalNumber;
+    // basket.children[1].textContent = 'Total Price: ' + totalPrice + '$';
   }
 }
 
