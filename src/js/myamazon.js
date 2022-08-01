@@ -1,10 +1,10 @@
 console.log('myamazon.js');
 
-import Store2 from './store.js'; // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+import Store2 from './store.js'; // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 let store = new Store2({},
                        {
                          data: [
-                           {name: 'benjerry', price: 5.95, qtty: 0},  // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+                           {name: 'benjerry', price: 5.95, qtty: 0}, // <<<<<
                            {name: 'caffelatte', price: 1.27, qtty: 0},
                            {name: 'calippo', price: 4.10, qtty: 0},
                            {name: 'evax', price: 2.40, qtty: 0},
@@ -18,13 +18,13 @@ let store = new Store2({},
                        },
                       );
 
-//import './basket.js';
-import './basket-stateless.js'
+import './basket.js'; // << this code must access the store but it's
+                      // executed too soon
+import './basket2.js'
 
 import './card.js';
 
 import '../css/myamazon.css';
-
 
 let foo = store.get('data');
 console.log('foo:');
@@ -44,7 +44,7 @@ itemList.addEventListener('addItem', (e)=>{
   let item = data.find((item) => item.name === name);
   item.qtty +=1;
 
-  //store.change({action: 'addItem', itemName: name}); // old <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+  //store.change({action: 'addItem', itemName: name}); // old <<<<<<<<<<<<<<
   store.set('data', data);
 });
 
@@ -54,43 +54,39 @@ itemList.addEventListener('removeItem', (e) => {
   let data = store.get('data');
   let item = data.find((item) => item.name === name);
   if (item.qtty > 0) {
-    //store.change({action: 'removeItem', itemName: name}); // old <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    //store.change({action: 'removeItem', itemName: name}); // old <<<<<<<<<<
     item.qtty -= 1;
     store.set('data', data);
   }
 });
 
-function renderBasket() {
+// stateless basket
+function renderBasket2() {
+  console.log('renderBasket2');
   let data = store.get('data');
   let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
   let totalPrice = data.reduce((acc, a) => acc + a.qtty*a.price, 0);
   totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
 
-  console.log('renderBasket1');
-  let basketDiv = document.getElementById('basketDiv');
-  console.log('renderBasket2');
-  let basket = document.createElement('basket-el');
+  let basketDiv = document.getElementById('basketDiv2');
+  let basket = document.createElement('basket-el2');
   //basket.setAttribute('totalNumber', 'Total number of items: 0');
   basket.setAttribute('totalNumber', 'Total number of items: ' + totalNumber);
   //basket.setAttribute('totalprice', 'Total Price: 0.00 $');
   basket.setAttribute('totalprice', 'Total Price: ' + totalPrice + ' $');
-  console.log('renderBasket3');
   basketDiv.appendChild(basket);
-  console.log('renderBasket4');
 }
 
-// old
-// function renderBasket() {
-//   console.log('renderBasket1');
-//   let basketDiv = document.getElementById('basketDiv');
-//   console.log('renderBasket2');
-//   let basket = document.createElement('basket-el');
-//   basket.setAttribute('totalNumber', 'Total number of items: 0');
-//   basket.setAttribute('totalprice', 'Total Price: 0.00 $');
-//   console.log('renderBasket3');
-//   basketDiv.appendChild(basket);
-//   console.log('renderBasket4');
-// }
+//import './basket.js';
+// stateful basket
+function renderBasket() {
+  console.log('renderBasket');
+  let basketDiv = document.getElementById('basketDiv');
+  let basket = document.createElement('basket-el');
+  basket.setAttribute('totalNumber', 'Total number of items: 0');
+  basket.setAttribute('totalprice', 'Total Price: 0.00 $');
+  basketDiv.appendChild(basket);
+}
 
 function render_list_of_items() {
   let data = store.get('data');
@@ -109,15 +105,15 @@ function render_list_of_items() {
   }
 }
 
-//store.registerListener(listElCallback); // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+//store.registerListener(listElCallback); // <<<<<<<<<<<<<<<<<<<<<
 store.register('data', listElCallback2);
 store.register('data', basketElCallback2);
 
 function basketElCallback2() {
   console.log('basketElCallback2');
-  let basketDiv = document.getElementById('basketDiv');
+  let basketDiv = document.getElementById('basketDiv2');
   basketDiv.innerHTML = "";
-  renderBasket();
+  renderBasket2();
 }
 
 function listElCallback2() {
@@ -140,5 +136,6 @@ function capitalizeFirstLetter(string) {
 
 (function init() {
   renderBasket();
+  renderBasket2();
   render_list_of_items();
 })();

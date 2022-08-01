@@ -1,4 +1,4 @@
-// This file assumes the existence of `store` global variable
+// assume global `store`;
 
 console.log('basket.js');
 
@@ -8,8 +8,7 @@ console.log('basket.js');
 class Basket extends HTMLElement {
   constructor() {
     super();
-    //store.registerListener(this.basketElCallback); // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    store.register('data', this.basketElCallback);
+    //store.register('data', this.basketElCallback); // <<<<<<<< ERROR
   }
 
   connectedCallback() {

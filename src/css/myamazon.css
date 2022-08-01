@@ -6,6 +6,13 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+#basketDiv2 {
+  background-color: #a89932;
+  width: 40%;
+  margin: auto;
+  border-radius: 10px;
+}
+
 #basketDiv {
   background-color: #2ecc71;
   width: 40%;

@@ -1,7 +1,4 @@
-// This file assumes the existence of `store` global variable
-
-
-console.log('basket-stateless.js');
+console.log('basket2.js');
 
 class BasketStateless extends HTMLElement {
   constructor() {
@@ -39,7 +36,7 @@ class BasketStateless extends HTMLElement {
   //}
 }
 
-customElements.define('basket-el', BasketStateless);
+customElements.define('basket-el2', BasketStateless);
 
 //export default Basket;
 
