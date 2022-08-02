@@ -111,8 +111,8 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-(function init() {
+export function init() {
   renderBasket();
   renderBasket2();
   render_list_of_items();
-})();
+};
