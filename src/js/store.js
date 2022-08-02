@@ -3,9 +3,9 @@
 console.log('store.js');
 
 class Store2 {
-  constructor(listeners, properties) {
-    this.listeners = listeners;
-    this.properties = properties;
+  constructor(properties) { // todo: call it state
+    this.listeners = {};
+    this.properties = properties; // todo: call it state
     console.log(this.properties);
   }
   
@@ -17,7 +17,7 @@ class Store2 {
   }
 
   get(prop) {
-    return this.properties[prop].slice(); // return copy
+    return JSON.parse(JSON.stringify(this.properties[prop])); // return deep copy
   }
 
   set(prop, newVal) {

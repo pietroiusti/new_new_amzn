@@ -4,11 +4,6 @@ class Item extends HTMLElement {
   constructor() {
     super();
     this.connectedCallbackHasBeenCalled = false;
-    // this.name = this.getAttribute('name');
-    // this.id = this.name+'Wrapper';
-    // this.price = this.getAttribute('price');
-    // this.imgSrc = this.getAttribute('imgSrc');
-    // this.qtty = this.getAttribute('qtty');
   }
 
   connectedCallback() {

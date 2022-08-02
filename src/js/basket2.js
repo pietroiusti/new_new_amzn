@@ -6,12 +6,6 @@ class BasketStateless extends HTMLElement {
   }
 
   connectedCallback() {
-    // OLD:
-    // this.innerHTML = `
-    //     <div id="totalNumberDiv">Total number of items: 0</div>
-    //     <div id="totalPriceDiv">Total Price: 0.00 $</div>
-    // `;
-    // USE DOM MANIPULATION INSTEAD:
     let totalNumberDiv = document.createElement('div');
     let totalNumberDivText = document.createTextNode(this.getAttribute('totalNumber'));
     totalNumberDiv.appendChild(totalNumberDivText);

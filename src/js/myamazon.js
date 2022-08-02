@@ -1,7 +1,7 @@
 console.log('myamazon.js');
 
-import Store2 from './store.js'; // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-let store = new Store2({},
+import Store2 from './store.js';
+export const store = new Store2(
                        {
                          data: [
                            {name: 'benjerry', price: 5.95, qtty: 0}, // <<<<<
@@ -18,18 +18,13 @@ let store = new Store2({},
                        },
                       );
 
-import './basket.js'; // << this code must access the store but it's
-                      // executed too soon
+import './basket.js';
+                      
 import './basket2.js'
 
 import './card.js';
 
 import '../css/myamazon.css';
-
-let foo = store.get('data');
-console.log('foo:');
-console.log(foo);
-
 
 // Make list of items (cards) listen to the custom events ('addItem'
 // and 'removeItem') emitted by the buttons.
@@ -44,7 +39,6 @@ itemList.addEventListener('addItem', (e)=>{
   let item = data.find((item) => item.name === name);
   item.qtty +=1;
 
-  //store.change({action: 'addItem', itemName: name}); // old <<<<<<<<<<<<<<
   store.set('data', data);
 });
 
@@ -54,7 +48,6 @@ itemList.addEventListener('removeItem', (e) => {
   let data = store.get('data');
   let item = data.find((item) => item.name === name);
   if (item.qtty > 0) {
-    //store.change({action: 'removeItem', itemName: name}); // old <<<<<<<<<<
     item.qtty -= 1;
     store.set('data', data);
   }
@@ -106,7 +99,8 @@ function render_list_of_items() {
 }
 
 store.register('data', listElCallback2);
-store.register('data', basketElCallback2);
+store.register('data', basketElCallback2); //<< stateless basket listener.
+// The listener for the stateful basket is registered by the basket itself
 
 function basketElCallback2() {
   console.log('basketElCallback2');
@@ -121,13 +115,6 @@ function listElCallback2() {
   itemList.innerHTML = "";
   render_list_of_items();
 }
-
-// function listElCallback(data, obj) {
-//   console.log('listElCallback');
-//   let listEl = document.getElementById(obj.itemName).parentElement;
-//   let updatedQtty = data.find(item => item.name === obj.itemName).qtty;
-//   listEl.setAttribute('qtty', updatedQtty);
-// }
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
