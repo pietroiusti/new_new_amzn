@@ -105,7 +105,6 @@ function render_list_of_items() {
   }
 }
 
-//store.registerListener(listElCallback); // <<<<<<<<<<<<<<<<<<<<<
 store.register('data', listElCallback2);
 store.register('data', basketElCallback2);
 

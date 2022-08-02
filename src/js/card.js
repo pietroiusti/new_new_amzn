@@ -114,5 +114,3 @@ class Item extends HTMLElement {
 }
 
 customElements.define('list-el', Item);
-
-//export default Item;

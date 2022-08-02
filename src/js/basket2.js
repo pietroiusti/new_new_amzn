@@ -23,20 +23,7 @@ class BasketStateless extends HTMLElement {
     this.appendChild(totalNumberDiv);
     this.appendChild(totalPriceDiv);
   }
-
-  //basketStatelessElCallback(data) {
-    //console.log('basketElCallback');
-    // let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
-    // let totalPrice = data.reduce((acc, a) => acc + a.qtty*a.price, 0);
-    // totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
-
-    // let basket = document.getElementsByTagName('basket-el')[0];
-    // basket.children[0].textContent = 'Total number of items: ' + totalNumber;
-    // basket.children[1].textContent = 'Total Price: ' + totalPrice + '$';
-  //}
 }
 
 customElements.define('basket-el2', BasketStateless);
-
-//export default Basket;
 

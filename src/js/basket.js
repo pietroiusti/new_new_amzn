@@ -2,9 +2,6 @@
 
 console.log('basket.js');
 
-//import store from './store.js';
-//import Store2 from './store.js';
-
 class Basket extends HTMLElement {
   constructor() {
     super();
@@ -43,5 +40,3 @@ class Basket extends HTMLElement {
 }
 
 customElements.define('basket-el', Basket);
-
-//export default Basket;
