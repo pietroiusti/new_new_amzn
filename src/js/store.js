@@ -17,7 +17,7 @@ class Store2 {
   }
 
   get(prop) {
-    return JSON.parse(JSON.stringify(this.properties[prop])); // return deep copy
+    return JSON.parse(JSON.stringify(this.properties[prop])); // return (deep) copy
   }
 
   set(prop, newVal) {

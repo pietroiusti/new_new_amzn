@@ -18,8 +18,12 @@ export const store = new Store2(
                        },
                       );
 
+import * as foobaz from './actionHandler.js'; // TODO: unfoo name...
+
+// foo.actionHandler('hello there!'); // <<<<<<<<<< test action
+
 import './basket.js';
-                      
+
 import './basket2.js'
 
 import './card.js';
@@ -33,24 +37,14 @@ itemList.addEventListener('addItem', (e)=>{
   console.log('itemList event listener');
   let parent = e.target.parentElement;
   let name = parent.id;
-  let data = store.get('data');
-  // console.log(data);
-  // console.log(name);
-  let item = data.find((item) => item.name === name);
-  item.qtty +=1;
-
-  store.set('data', data);
+  foobaz.actionHandler( {action: 'add', itemName: name} );
 });
 
 itemList.addEventListener('removeItem', (e) => {
   let parent = event.target.parentElement;
   let name = parent.id;
-  let data = store.get('data');
-  let item = data.find((item) => item.name === name);
-  if (item.qtty > 0) {
-    item.qtty -= 1;
-    store.set('data', data);
-  }
+
+  foobaz.actionHandler( {action: 'remove', itemName: name} );
 });
 
 // stateless basket
