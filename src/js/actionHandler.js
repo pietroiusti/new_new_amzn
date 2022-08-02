@@ -2,7 +2,7 @@ console.log('actionHandler.js');
 
 import { store } from "./myamazon.js";
 
-export function actionHandler(obj) {
+function actionHandler(obj) {
   let action = obj.action;
   let itemName = obj.itemName;
   
@@ -22,3 +22,5 @@ export function actionHandler(obj) {
     console.log('Error: Action unknown.');
   }
 }
+
+export { actionHandler };

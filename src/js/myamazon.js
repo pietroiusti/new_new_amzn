@@ -18,9 +18,7 @@ export const store = new Store2(
                        },
                       );
 
-import * as foobaz from './actionHandler.js'; // TODO: unfoo name...
-
-// foo.actionHandler('hello there!'); // <<<<<<<<<< test action
+import { actionHandler } from './actionHandler.js'
 
 import './basket.js';
 
@@ -37,14 +35,13 @@ itemList.addEventListener('addItem', (e)=>{
   console.log('itemList event listener');
   let parent = e.target.parentElement;
   let name = parent.id;
-  foobaz.actionHandler( {action: 'add', itemName: name} );
+  actionHandler( {action: 'add', itemName: name} );
 });
 
 itemList.addEventListener('removeItem', (e) => {
   let parent = event.target.parentElement;
   let name = parent.id;
-
-  foobaz.actionHandler( {action: 'remove', itemName: name} );
+  actionHandler( {action: 'remove', itemName: name} );
 });
 
 // stateless basket
