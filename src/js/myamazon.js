@@ -30,6 +30,7 @@ import '../css/myamazon.css';
 
 // Make list of items (cards) listen to the custom events ('addItem'
 // and 'removeItem') emitted by the buttons.
+console.log('hola');
 let itemList = document.getElementById('itemList');
 itemList.addEventListener('addItem', (e)=>{
   console.log('itemList event listener');
