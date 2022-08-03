@@ -32,7 +32,7 @@ import '../css/myamazon.css';
 // and 'removeItem') emitted by the buttons.
 console.log('hola');
 let itemList = document.getElementById('itemList');
-itemList.addEventListener('addItem', (e)=>{
+itemList.addEventListener('addItem', (e) => {
   console.log('itemList event listener');
   let parent = e.target.parentElement;
   let name = parent.id;
@@ -75,7 +75,7 @@ function renderBasket() {
 
 function render_list_of_items() {
   let data = store.get('data');
-  //console.log('data:');
+  console.log('render_list_of_items');
   //console.log(data);
   let itemList = document.getElementById('itemList');
   for (let i = 0; i < data.length; i++) {
@@ -94,18 +94,30 @@ store.register('data', listElCallback2);
 store.register('data', basketElCallback2); //<< stateless basket listener.
 // The listener for the stateful basket is registered by the basket itself
 
-function basketElCallback2() {
+function basketElCallback2(data) {
   console.log('basketElCallback2');
   let basketDiv = document.getElementById('basketDiv2');
   basketDiv.innerHTML = "";
   renderBasket2();
 }
 
-function listElCallback2() {
+function listElCallback2(data) {
   console.log('listElCallback2');
+  //let itemList = document.getElementById('itemList');
+  //itemList.innerHTML = "";
+  //render_list_of_items(data);
   let itemList = document.getElementById('itemList');
-  itemList.innerHTML = "";
-  render_list_of_items();
+  console.log(itemList);
+  console.log(itemList.children.length);
+  for (let i = 0; i < itemList.children.length; i++) {
+    console.log(itemList.children[i]);
+    let item = itemList.children[i];
+    item.setAttribute('qtty', data[i].qtty); //this relies on the fact
+                                             //that that data and
+                                             //itemList have the same
+                                             //members in the same
+                                             //order.
+  }
 }
 
 function capitalizeFirstLetter(string) {

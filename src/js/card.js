@@ -100,14 +100,19 @@ class Item extends HTMLElement {
   }
 
   attributeChangedCallback(attrName, oldVal, newVal) {
-    if (!this.connectedCallbackHasBeenCalled)
+    console.log('hellloooooooooooooooo');
+    if (!this.connectedCallbackHasBeenCalled) {
+      console.log('attributeChangedCallback has not been called');
       return;
+    }
+    console.log('attrName: ' + attrName);
+    console.log('oldVal: ' + oldVal);
+    console.log('newVal: ' + newVal);
 
-    //if  (oldVal != newVal) // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-                                       // ^
-    if (attrName === 'qtty') { // I could pass the whole item instad of 'qtty'
-      if (newVal !== oldVal) {
-        this.ref.children[3].textContent = newVal;
+    if (oldVal != newVal) {
+      console.log('I should change this!');
+      if (attrName === 'qtty') {
+        this.ref.textContent = newVal;
       }
     }
   }
