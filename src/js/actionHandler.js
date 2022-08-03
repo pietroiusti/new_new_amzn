@@ -8,6 +8,14 @@ function actionHandler(obj) {
   
   if (action === 'add') {
     let data = store.get('data'); // get copy of data
+    // todo: get real value not copy
+
+    // let item = ...
+    // create new ref
+    // e.g.
+    // can be a shallow copy... 
+    
+    
     let item = data.find(item => item.name === itemName);
     item.qtty += 1;
     store.set('data', data);

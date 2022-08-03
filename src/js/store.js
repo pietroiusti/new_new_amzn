@@ -4,9 +4,9 @@ console.log('store.js');
 import _ from 'lodash';
 
 class Store2 {
-  constructor(state) { // todo: call it state
+  constructor(state) {
     this.listeners = {};
-    this.state = state; // todo: call it state
+    this.state = state;
   }
   
   register(prop, cb) {

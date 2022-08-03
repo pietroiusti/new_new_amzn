@@ -101,9 +101,13 @@ class Item extends HTMLElement {
     if (!this.connectedCallbackHasBeenCalled)
       return;
 
-    if (attrName === 'qtty') {
-      let item = document.getElementById(this.name);
-      item.children[3].textContent = newVal;
+    //if  (oldVal != newVal) // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+                                       // ^
+    if (attrName === 'qtty') { // I could pass the whole item instad of 'qtty'
+      if (newVal !== oldVal) {
+        let item = document.getElementById(this.name); // store reference to item in the constructor
+        item.children[3].textContent = newVal;
+      }
     }
   }
 }

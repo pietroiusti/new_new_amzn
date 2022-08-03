@@ -5,6 +5,7 @@ const webpack = require('webpack'); //to access built-in plugins
 
 module.exports = {
   mode: 'development',
+  //entry: {index: './src/js/index.js'},
   entry: './src/js/index.js',
   output: {
     filename: 'bundle.js',
@@ -18,6 +19,7 @@ module.exports = {
       },
     ],
   },
+  //plugins: [new HtmlWebpackPlugin({ template: './src/shop_template.html', inject: true, chunks: ['index'] })],
   plugins: [new HtmlWebpackPlugin({ template: './src/shop_template.html' })],
   devServer: {
     static: {
