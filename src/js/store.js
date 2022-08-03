@@ -1,12 +1,10 @@
 'use strict';
-
 console.log('store.js');
 
 class Store2 {
-  constructor(properties) { // todo: call it state
+  constructor(state) { // todo: call it state
     this.listeners = {};
-    this.properties = properties; // todo: call it state
-    console.log(this.properties);
+    this.state = state; // todo: call it state
   }
   
   register(prop, cb) {
@@ -17,11 +15,11 @@ class Store2 {
   }
 
   get(prop) {
-    return JSON.parse(JSON.stringify(this.properties[prop])); // return (deep) copy
+    return JSON.parse(JSON.stringify(this.state[prop])); // return (deep) copy
   }
 
   set(prop, newVal) {
-    this.properties[prop] = newVal;
+    this.state[prop] = newVal;
     for (let f of this.listeners[prop]) {
       f(newVal);
     }
