@@ -110,3 +110,16 @@ npm install --save-dev style-loader css-loader
 ...
 #+end_src
 
+* Turning myamazon.js into a module
+
+* Generalizing the store
+
+* Immutability
+
+* webpack plugins
+- html-webpack-plugin
+
+* webpack-dev-server
+  - install: ~npm install webpack-dev-server --save-dev~;
+  - add some conf to webpack.config.js;
+  - start with: ~npx webpack serve~.

@@ -19,4 +19,10 @@ module.exports = {
     ],
   },
   plugins: [new HtmlWebpackPlugin({ template: './src/shop_template.html' })],
+  devServer: {
+    static: {
+      directory: path.join(__dirname, '/'),
+    },
+    port: 8080,
+  },
 };
