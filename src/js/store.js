@@ -1,6 +1,8 @@
 'use strict';
 console.log('store.js');
 
+import _ from 'lodash';
+
 class Store2 {
   constructor(state) { // todo: call it state
     this.listeners = {};
@@ -15,7 +17,7 @@ class Store2 {
   }
 
   get(prop) {
-    return JSON.parse(JSON.stringify(this.state[prop])); // return (deep) copy
+    return _.cloneDeep(this.state[prop]); // return (deep) copy
   }
 
   set(prop, newVal) {
