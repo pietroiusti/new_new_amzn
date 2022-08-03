@@ -14,6 +14,7 @@ class Item extends HTMLElement {
     this.price = this.getAttribute('price');
     this.imgSrc = this.getAttribute('imgSrc');
     this.qtty = this.getAttribute('qtty');
+    this.ref = null; // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     
     // OLD:
     // this.innerHTML = `
@@ -59,6 +60,7 @@ class Item extends HTMLElement {
     item.appendChild(imgDiv);
 
     let qtty = document.createElement('div');
+    this.ref = qtty; // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     qtty.setAttribute('class', 'qtty');
     let qttyText = document.createTextNode(this.qtty);
     qtty.appendChild(qttyText);
@@ -105,8 +107,7 @@ class Item extends HTMLElement {
                                        // ^
     if (attrName === 'qtty') { // I could pass the whole item instad of 'qtty'
       if (newVal !== oldVal) {
-        let item = document.getElementById(this.name); // store reference to item in the constructor
-        item.children[3].textContent = newVal;
+        this.ref.children[3].textContent = newVal;
       }
     }
   }
