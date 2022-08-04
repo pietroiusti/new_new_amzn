@@ -114,7 +114,7 @@ function listElCallback2(data) {
   //console.log('listElCallback2');
   let itemList = document.getElementById('itemList');
   for (let i = 0; i < itemList.children.length; i++) {
-    console.log(itemList.children[i]);
+    //console.log(itemList.children[i]);
     let item = itemList.children[i];
     item.setAttribute('qtty', data[i].qtty); // this relies on the
                                              // fact that data and

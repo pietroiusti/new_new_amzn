@@ -14,7 +14,7 @@ class Item extends HTMLElement {
     this.price = this.getAttribute('price');
     this.imgSrc = this.getAttribute('imgSrc');
     this.qtty = this.getAttribute('qtty');
-    this.ref = null;
+    this.qttyRef = null;
     
     // OLD:
     // this.innerHTML = `
@@ -60,7 +60,7 @@ class Item extends HTMLElement {
     item.appendChild(imgDiv);
 
     let qtty = document.createElement('div');
-    this.ref = qtty;
+    this.qttyRef = qtty;
     qtty.setAttribute('class', 'qtty');
     let qttyText = document.createTextNode(this.qtty);
     qtty.appendChild(qttyText);
@@ -84,7 +84,6 @@ class Item extends HTMLElement {
 
   handleClickAdd(event) {
     //event.target => button
-    //console.log('button');
     const customEvent = new CustomEvent('addItem', { bubbles: true });
     event.target.dispatchEvent(customEvent);
   }
@@ -107,7 +106,7 @@ class Item extends HTMLElement {
 
     if (oldVal != newVal) {
       if (attrName === 'qtty') {
-        this.ref.textContent = newVal;
+        this.qttyRef.textContent = newVal;
       }
     }
   }
