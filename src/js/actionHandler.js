@@ -10,7 +10,7 @@ function actionHandler(obj) {
   if (action === 'add') {
     let data = store.get('data');
 
-    let index; // todo: you can use findIndex // or use directly find
+    let index; // you could also use find
     for (let i = 0; i < data.length; i++) {
       if (data[i].name === itemName) {
         index = i;
@@ -20,18 +20,25 @@ function actionHandler(obj) {
     //console.log('old data:');
     //console.log(data); //<<<<<<< updated??? why?
 
-
-    // todo:  newDataRef = [...data]; // shallow copy    
-    
-    
-    data[index] = _.cloneDeep(data[index]); // change ref
-
-    data[index].qtty += 1;
-
-    //console.log('updated data:');
-    //console.log(data);
-    
-    store.set('data', data);
+    let dataShallowCopy = [...data]; // create a new array, with the
+                                     // same references that are
+                                     // inside data.
+    // The modified shallow copy will be passed to the store. We do
+    // so, because other components can check whether data has changed
+    // just by comparing the references.
+    dataShallowCopy[index] = _.cloneDeep(dataShallowCopy[index]); // change
+                                                                  // one
+                                                                  // of
+                                                                  // the
+                                                                  // references
+                                                                  // (make
+                                                                  // it
+                                                                  // point
+                                                                  // to
+                                                                  // a
+                                                                  // copy)
+    data[index].qtty += 1; // update the copy
+    store.set('data', data); // use the copy to update data in store
   } else if (action === 'remove') {
     let data = store.get('data'); // get copy of data
     let item = data.find(item => item.name === itemName);
