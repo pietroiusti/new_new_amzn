@@ -28,9 +28,9 @@ import './card.js';
 
 import '../css/myamazon.css';
 
-import { hello } from "./test.js";
+//import { hello } from "./test.js";
 
-hello();
+//hello();
 
 // Make list of items (cards) listen to the custom events ('addItem'
 // and 'removeItem') emitted by the buttons.

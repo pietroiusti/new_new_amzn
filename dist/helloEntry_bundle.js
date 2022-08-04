@@ -16,7 +16,7 @@
   \************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"hello\": () => (/* binding */ hello)\n/* harmony export */ });\nfunction hello() {\n  console.log('hello world!');\n}\n\n\n//# sourceURL=webpack://new_new_amzn/./src/js/test.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"hello\": () => (/* binding */ hello)\n/* harmony export */ });\nfunction hello() {\n  console.log('hello world from test.js (another webpack entry) (which means we are gonna have another chunk)!');\n}\n\n\n//# sourceURL=webpack://new_new_amzn/./src/js/test.js?");
 
 /***/ })
 

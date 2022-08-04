@@ -9,6 +9,9 @@ class Item extends HTMLElement {
   connectedCallback() {
     this.connectedCallbackHasBeenCalled = true;
 
+    // todo: have a single attribute `props` or `data`, which is a
+    // dictionary with the all properties
+
     this.name = this.getAttribute('name');
     this.id = this.name+'Wrapper';
     this.price = this.getAttribute('price');

@@ -22,7 +22,7 @@ module.exports = {
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({ template: './src/shop_template.html', inject: true, chunks: ['index'] })],
+  plugins: [new HtmlWebpackPlugin({ template: './src/shop_template.html', inject: true, chunks: ['index', 'helloEntry'] })],
   //before: plugins: [new HtmlWebpackPlugin({ template: './src/shop_template.html' })],
   devServer: {
     static: {
