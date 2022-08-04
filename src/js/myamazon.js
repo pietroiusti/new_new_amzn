@@ -56,9 +56,9 @@ function renderBasket2() {
   let basketDiv = document.getElementById('basketDiv2');
   let basket = document.createElement('basket-el2');
   //basket.setAttribute('totalNumber', 'Total number of items: 0');
-  basket.setAttribute('totalNumber', 'Total number of items: ' + totalNumber);
+  basket.setAttribute('totalnumber', 'Total number of items: ' + totalNumber);
   //basket.setAttribute('totalprice', 'Total Price: 0.00 $');
-  basket.setAttribute('totalprice', 'Total Price: ' + totalPrice + ' $');
+  basket.setAttribute('totalprice', 'Total Price:  $ ' + totalPrice);
   basketDiv.appendChild(basket);
 }
 
@@ -68,7 +68,7 @@ function renderBasket() {
   console.log('renderBasket');
   let basketDiv = document.getElementById('basketDiv');
   let basket = document.createElement('basket-el');
-  basket.setAttribute('totalNumber', 'Total number of items: 0');
+  basket.setAttribute('totalnumber', 'Total number of items: 0');
   basket.setAttribute('totalprice', 'Total Price: 0.00 $');
   basketDiv.appendChild(basket);
 }
@@ -96,9 +96,23 @@ store.register('data', basketElCallback2); //<< stateless basket listener.
 
 function basketElCallback2(data) {
   console.log('basketElCallback2');
-  let basketDiv = document.getElementById('basketDiv2');
-  basketDiv.innerHTML = "";
-  renderBasket2();
+
+  //OLD:
+  //basketDiv.innerHTML = "";
+  //renderBasket2();
+
+  let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
+  let totalPrice = data.reduce((acc, a) => acc + a.qtty*a.price, 0);
+  totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
+
+  let statelessBasket = document.getElementsByTagName('basket-el2')[0];
+
+  console.log(statelessBasket);
+
+  console.log('setting totalNumber attribute for statelessBasket');
+  statelessBasket.setAttribute('totalNumber', totalNumber);
+  console.log('setting totalprice attribute for statelessBasket');
+  statelessBasket.setAttribute('totalPrice', totalPrice);
 }
 
 function listElCallback2(data) {
@@ -112,11 +126,11 @@ function listElCallback2(data) {
   for (let i = 0; i < itemList.children.length; i++) {
     console.log(itemList.children[i]);
     let item = itemList.children[i];
-    item.setAttribute('qtty', data[i].qtty); //this relies on the fact
-                                             //that that data and
-                                             //itemList have the same
-                                             //members in the same
-                                             //order.
+    item.setAttribute('qtty', data[i].qtty); // this relies on the
+                                             // fact that data and
+                                             // itemList have the same
+                                             // members in the same
+                                             // order.
   }
 }
 

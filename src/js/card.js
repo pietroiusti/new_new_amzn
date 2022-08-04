@@ -100,14 +100,14 @@ class Item extends HTMLElement {
   }
 
   attributeChangedCallback(attrName, oldVal, newVal) {
-    console.log('hellloooooooooooooooo');
+    console.log('Item attributeChangedCallback');
     if (!this.connectedCallbackHasBeenCalled) {
       console.log('attributeChangedCallback has not been called');
       return;
     }
-    console.log('attrName: ' + attrName);
-    console.log('oldVal: ' + oldVal);
-    console.log('newVal: ' + newVal);
+    // console.log('attrName: ' + attrName);
+    // console.log('oldVal: ' + oldVal);
+    // console.log('newVal: ' + newVal);
 
     if (oldVal != newVal) {
       console.log('I should change this!');
