@@ -30,10 +30,9 @@ import '../css/myamazon.css';
 
 // Make list of items (cards) listen to the custom events ('addItem'
 // and 'removeItem') emitted by the buttons.
-console.log('hola');
 let itemList = document.getElementById('itemList');
 itemList.addEventListener('addItem', (e) => {
-  console.log('itemList event listener');
+  //console.log('itemList event listener');
   let parent = e.target.parentElement;
   let name = parent.id;
   actionHandler( {action: 'add', itemName: name} );
@@ -47,7 +46,7 @@ itemList.addEventListener('removeItem', (e) => {
 
 // stateless basket
 function renderBasket2() {
-  console.log('renderBasket2');
+  //console.log('renderBasket2');
   let data = store.get('data');
   let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
   let totalPrice = data.reduce((acc, a) => acc + a.qtty*a.price, 0);
@@ -65,7 +64,7 @@ function renderBasket2() {
 //import './basket.js';
 // stateful basket
 function renderBasket() {
-  console.log('renderBasket');
+  //console.log('renderBasket');
   let basketDiv = document.getElementById('basketDiv');
   let basket = document.createElement('basket-el');
   basket.setAttribute('totalnumber', 'Total number of items: 0');
@@ -75,7 +74,7 @@ function renderBasket() {
 
 function render_list_of_items() {
   let data = store.get('data');
-  console.log('render_list_of_items');
+  //console.log('render_list_of_items');
   //console.log(data);
   let itemList = document.getElementById('itemList');
   for (let i = 0; i < data.length; i++) {
@@ -95,11 +94,7 @@ store.register('data', basketElCallback2); //<< stateless basket listener.
 // The listener for the stateful basket is registered by the basket itself
 
 function basketElCallback2(data) {
-  console.log('basketElCallback2');
-
-  //OLD:
-  //basketDiv.innerHTML = "";
-  //renderBasket2();
+  //console.log('basketElCallback2');
 
   let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
   let totalPrice = data.reduce((acc, a) => acc + a.qtty*a.price, 0);
@@ -107,22 +102,17 @@ function basketElCallback2(data) {
 
   let statelessBasket = document.getElementsByTagName('basket-el2')[0];
 
-  console.log(statelessBasket);
+  //console.log(statelessBasket);
 
-  console.log('setting totalNumber attribute for statelessBasket');
+  //console.log('setting totalNumber attribute for statelessBasket');
   statelessBasket.setAttribute('totalNumber', totalNumber);
-  console.log('setting totalprice attribute for statelessBasket');
+  //console.log('setting totalprice attribute for statelessBasket');
   statelessBasket.setAttribute('totalPrice', totalPrice);
 }
 
 function listElCallback2(data) {
-  console.log('listElCallback2');
-  //let itemList = document.getElementById('itemList');
-  //itemList.innerHTML = "";
-  //render_list_of_items(data);
+  //console.log('listElCallback2');
   let itemList = document.getElementById('itemList');
-  console.log(itemList);
-  console.log(itemList.children.length);
   for (let i = 0; i < itemList.children.length; i++) {
     console.log(itemList.children[i]);
     let item = itemList.children[i];

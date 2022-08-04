@@ -28,7 +28,7 @@ class Basket extends HTMLElement {
   }
 
   basketElCallback(data) {
-    console.log('basketElCallback');
+    //console.log('basketElCallback');
 
     let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
     let totalPrice = data.reduce((acc, a) => acc + a.qtty*a.price, 0);

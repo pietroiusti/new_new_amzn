@@ -17,12 +17,11 @@ class Store2 {
   }
 
   get(prop) {
-    //return _.cloneDeep(this.state[prop]); // return (deep) copy
     return this.state[prop];
   }
 
   set(prop, newVal) {
-    console.log('store set');
+    //console.log('store set');
     this.state[prop] = newVal;
     for (let f of this.listeners[prop]) {
       f(newVal);

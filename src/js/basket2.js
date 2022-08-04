@@ -27,28 +27,23 @@ class BasketStateless extends HTMLElement {
   }
 
   attributeChangedCallback(attrName, oldVal, newVal) {
-    console.log('BasketStateless attributeChangedCallback');
+    //console.log('BasketStateless attributeChangedCallback');
 
     if (!this.connectedCallbackHasBeenCalled)
       return;
 
-    console.log('attrName: '+ attrName);
+    //console.log('attrName: '+ attrName);
 
     if (oldVal !== newVal) {
       if (attrName === 'totalnumber') {
-        //console.log(this.totalNumberDivRef);
         this.totalNumberDivRef.textContent = "Total number of items: " + newVal;
       } else if (attrName === 'totalprice') {
-        //console.log(this.totalNumberDivRef);
         this.totalPriceDivRef.textContent = "Total Price:  $ " + newVal;
       } else {
         console.log('??????????');
         console.log(attrName);
       }
     }
-    // let divs = this.children;
-    // divs[0].textContent = 'Total number of items: ' + totalNumber;
-    // divs[1].textContent = 'totalprice', 'Total Price:  $ ' + totalPrice;
   }
 }
 

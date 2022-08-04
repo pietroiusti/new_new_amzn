@@ -14,7 +14,7 @@ class Item extends HTMLElement {
     this.price = this.getAttribute('price');
     this.imgSrc = this.getAttribute('imgSrc');
     this.qtty = this.getAttribute('qtty');
-    this.ref = null; // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    this.ref = null;
     
     // OLD:
     // this.innerHTML = `
@@ -60,7 +60,7 @@ class Item extends HTMLElement {
     item.appendChild(imgDiv);
 
     let qtty = document.createElement('div');
-    this.ref = qtty; // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    this.ref = qtty;
     qtty.setAttribute('class', 'qtty');
     let qttyText = document.createTextNode(this.qtty);
     qtty.appendChild(qttyText);
@@ -84,7 +84,7 @@ class Item extends HTMLElement {
 
   handleClickAdd(event) {
     //event.target => button
-    console.log('button');
+    //console.log('button');
     const customEvent = new CustomEvent('addItem', { bubbles: true });
     event.target.dispatchEvent(customEvent);
   }
@@ -100,17 +100,12 @@ class Item extends HTMLElement {
   }
 
   attributeChangedCallback(attrName, oldVal, newVal) {
-    console.log('Item attributeChangedCallback');
+    //console.log('Item attributeChangedCallback');
     if (!this.connectedCallbackHasBeenCalled) {
-      console.log('attributeChangedCallback has not been called');
       return;
     }
-    // console.log('attrName: ' + attrName);
-    // console.log('oldVal: ' + oldVal);
-    // console.log('newVal: ' + newVal);
 
     if (oldVal != newVal) {
-      console.log('I should change this!');
       if (attrName === 'qtty') {
         this.ref.textContent = newVal;
       }
