@@ -5,10 +5,13 @@ const webpack = require('webpack'); //to access built-in plugins
 
 module.exports = {
   mode: 'development',
-  entry: {index: './src/js/index.js'},
+  entry: {
+    index: './src/js/index.js',
+    helloEntry: './src/js/test.js',
+  },
   //before: entry: './src/js/index.js',
   output: {
-    filename: 'bundle.js',
+    filename: '[id]_bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
   module: {

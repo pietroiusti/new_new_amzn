@@ -18,7 +18,7 @@ export const store = new Store2(
                        },
                       );
 
-import { actionHandler } from './actionHandler.js'
+import { actionHandler } from './actionHandler.js';
 
 import './basket.js';
 
@@ -27,6 +27,10 @@ import './basket2.js'
 import './card.js';
 
 import '../css/myamazon.css';
+
+import { hello } from "./test.js";
+
+hello();
 
 // Make list of items (cards) listen to the custom events ('addItem'
 // and 'removeItem') emitted by the buttons.
