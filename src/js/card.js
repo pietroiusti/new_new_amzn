@@ -12,15 +12,16 @@ class Item extends HTMLElement {
     // todo: have a single attribute `props` or `data`, which is a
     // dictionary with the all properties
 
-    this.name = this.getAttribute('name');
-    this.id = this.name+'Wrapper';
-    this.price = this.getAttribute('price');
-    this.imgSrc = this.getAttribute('imgSrc');
-    this.qtty = this.getAttribute('qtty');
-    this.qttyRef = null;
-    
-    // OLD:
-    // this.innerHTML = `
+    this.props = {
+      name: this.getAttribute('name'),
+      id: this.name+'Wrapper',
+      price: this.getAttribute('price'),
+      imgSrc: this.getAttribute('imgSrc'),
+      qtty: this.getAttribute('qtty'),
+      qttyRef: null,
+    };
+
+    //     Tag representation of an item:
     //     <div id="${this.name}" class="item">
     //         <div class="name">
     //             ${this.name}
@@ -37,46 +38,44 @@ class Item extends HTMLElement {
     //         <button id="remove${this.name}Button">-</button>
     //         <button id="add${this.name}Button">+</button>
     //     </div>
-    // `;
-    // USE DOM MANIPULATION INSTEAD:
     let item = document.createElement('div');
-    item.setAttribute('id', this.name);
+    item.setAttribute('id', this.props.name);
     item.setAttribute('class', 'item');
 
     let name = document.createElement('div');
-    name.setAttribute('class', this.name);
-    let nameText = document.createTextNode(this.name);
+    name.setAttribute('class', this.props.name);
+    let nameText = document.createTextNode(this.props.name);
     name.appendChild(nameText);
     item.appendChild(name);
 
     let price = document.createElement('div');
     price.setAttribute('class', 'price');
-    let priceText = document.createTextNode(this.price);
+    let priceText = document.createTextNode(this.props.price);
     price.appendChild(priceText);
     item.appendChild(price);
 
     let imgDiv = document.createElement('div');
     imgDiv.setAttribute('class', 'imgDiv');
     let img = document.createElement('img');
-    img.setAttribute('src', this.imgSrc);
+    img.setAttribute('src', this.props.imgSrc);
     imgDiv.appendChild(img);
     item.appendChild(imgDiv);
 
     let qtty = document.createElement('div');
-    this.qttyRef = qtty;
+    this.props.qttyRef = qtty;
     qtty.setAttribute('class', 'qtty');
-    let qttyText = document.createTextNode(this.qtty);
+    let qttyText = document.createTextNode(this.props.qtty);
     qtty.appendChild(qttyText);
     item.appendChild(qtty);
 
     let buttonRemove = document.createElement('button');
-    buttonRemove.setAttribute('id', 'remove'+this.name+'Button');
+    buttonRemove.setAttribute('id', 'remove'+this.props.name+'Button');
     let buttonRemoveText = document.createTextNode('-');
     buttonRemove.appendChild(buttonRemoveText);
     buttonRemove.addEventListener('click', e => this.handleClickRemove(e));
     item.appendChild(buttonRemove);
     let buttonAdd = document.createElement('button');
-    buttonAdd.setAttribute('id', 'add'+this.name+'Button');
+    buttonAdd.setAttribute('id', 'add'+this.props.name+'Button');
     let buttonAddText = document.createTextNode('+');
     buttonAdd.appendChild(buttonAddText);
     buttonAdd.addEventListener('click', e => this.handleClickAdd(e));
@@ -109,7 +108,7 @@ class Item extends HTMLElement {
 
     if (oldVal != newVal) {
       if (attrName === 'qtty') {
-        this.qttyRef.textContent = newVal;
+        this.props.qttyRef.textContent = newVal;
       }
     }
   }

@@ -58,14 +58,18 @@ function renderBasket2() {
 
   let basketDiv = document.getElementById('basketDiv2');
   let basket = document.createElement('basket-el2');
-  //basket.setAttribute('totalNumber', 'Total number of items: 0');
   basket.setAttribute('totalnumber', 'Total number of items: ' + totalNumber);
-  //basket.setAttribute('totalprice', 'Total Price: 0.00 $');
   basket.setAttribute('totalprice', 'Total Price:  $ ' + totalPrice);
+
+  let propObj = {
+    totalnumber: 'Total number of items: 0',
+    totalprice: 'Total Price: 0.00 $',
+  };
+  basket.setAttribute('props', JSON.stringify(propObj));
+
   basketDiv.appendChild(basket);
 }
 
-//import './basket.js';
 // stateful basket
 function renderBasket() {
   //console.log('renderBasket');

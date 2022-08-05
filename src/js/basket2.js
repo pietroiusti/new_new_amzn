@@ -7,15 +7,17 @@ class BasketStateless extends HTMLElement {
   }
 
   connectedCallback() {
+    let props = JSON.parse(this.getAttribute('props'));
+
     this.connectedCallbackHasBeenCalled = true;
     let totalNumberDiv = document.createElement('div');
     this.totalNumberDivRef = totalNumberDiv;
-    let totalNumberDivText = document.createTextNode(this.getAttribute('totalnumber'));
+    let totalNumberDivText = document.createTextNode(props.totalnumber);
     totalNumberDiv.appendChild(totalNumberDivText);
     
     let totalPriceDiv = document.createElement('div');
     this.totalPriceDivRef = totalPriceDiv;
-    let totalPriceDivText = document.createTextNode(this.getAttribute('totalprice'));
+    let totalPriceDivText = document.createTextNode(props.totalprice);
     totalPriceDiv.appendChild(totalPriceDivText);
     
     this.appendChild(totalNumberDiv);
