@@ -5,6 +5,8 @@ const webpack = require('webpack'); //to access built-in plugins
 
 module.exports = {
   mode: 'development',
+  //devtool: 'inline-source-map', // option best for development, map is put in the bundle
+  devtool: 'source-map', // good for production, map is put in a different file
   entry: {
     index: './src/js/index.js',
     helloEntry: './src/js/test.js',
