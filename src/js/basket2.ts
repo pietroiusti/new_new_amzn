@@ -1,6 +1,9 @@
 console.log('basket2.js');
 
 class BasketStateless extends HTMLElement {
+  connectedCallbackHasBeenCalled: boolean;
+  totalNumberDivRef: HTMLDivElement;
+  totalPriceDivRef: HTMLDivElement;
   constructor() {
     super();
     this.connectedCallbackHasBeenCalled = false;

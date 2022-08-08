@@ -22,7 +22,7 @@ import { actionHandler } from './actionHandler.js';
 
 import './basket.js';
 
-import './basket2.js'
+import './basket2.ts'
 
 import './card.js';
 

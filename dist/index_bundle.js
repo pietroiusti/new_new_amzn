@@ -17521,69 +17521,6 @@ customElements.define('basket-el', Basket);
 
 /***/ }),
 
-/***/ "./src/js/basket2.js":
-/*!***************************!*\
-  !*** ./src/js/basket2.js ***!
-  \***************************/
-/***/ (() => {
-
-console.log('basket2.js');
-
-class BasketStateless extends HTMLElement {
-  constructor() {
-    super();
-    this.connectedCallbackHasBeenCalled = false;
-  }
-
-  connectedCallback() {
-    let props = JSON.parse(this.getAttribute('props'));
-
-    this.connectedCallbackHasBeenCalled = true;
-    let totalNumberDiv = document.createElement('div');
-    this.totalNumberDivRef = totalNumberDiv;
-    let totalNumberDivText = document.createTextNode(props.totalnumber);
-    totalNumberDiv.appendChild(totalNumberDivText);
-    
-    let totalPriceDiv = document.createElement('div');
-    this.totalPriceDivRef = totalPriceDiv;
-    let totalPriceDivText = document.createTextNode(props.totalprice);
-    totalPriceDiv.appendChild(totalPriceDivText);
-    
-    this.appendChild(totalNumberDiv);
-    this.appendChild(totalPriceDiv);
-  }
-
-  static get observedAttributes() {
-    return [ 'totalnumber', 'totalprice', ];
-  }
-
-  attributeChangedCallback(attrName, oldVal, newVal) {
-    //console.log('BasketStateless attributeChangedCallback');
-
-    if (!this.connectedCallbackHasBeenCalled)
-      return;
-
-    //console.log('attrName: '+ attrName);
-
-    if (oldVal !== newVal) {
-      if (attrName === 'totalnumber') {
-        this.totalNumberDivRef.textContent = "Total number of items: " + newVal;
-      } else if (attrName === 'totalprice') {
-        this.totalPriceDivRef.textContent = "Total Price:  $ " + newVal;
-      } else {
-        console.log('??????????');
-        console.log(attrName);
-      }
-    }
-  }
-}
-
-customElements.define('basket-el2', BasketStateless);
-
-
-
-/***/ }),
-
 /***/ "./src/js/card.js":
 /*!************************!*\
   !*** ./src/js/card.js ***!
@@ -17726,8 +17663,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store.js */ "./src/js/store.js");
 /* harmony import */ var _actionHandler_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actionHandler.js */ "./src/js/actionHandler.js");
 /* harmony import */ var _basket_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./basket.js */ "./src/js/basket.js");
-/* harmony import */ var _basket2_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./basket2.js */ "./src/js/basket2.js");
-/* harmony import */ var _basket2_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_basket2_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _basket2_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./basket2.ts */ "./src/js/basket2.ts");
+/* harmony import */ var _basket2_ts__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_basket2_ts__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _card_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./card.js */ "./src/js/card.js");
 /* harmony import */ var _card_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_card_js__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _css_myamazon_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../css/myamazon.css */ "./src/css/myamazon.css");
@@ -18292,6 +18229,59 @@ function styleTagTransform(css, styleElement) {
 
 module.exports = styleTagTransform;
 
+/***/ }),
+
+/***/ "./src/js/basket2.ts":
+/*!***************************!*\
+  !*** ./src/js/basket2.ts ***!
+  \***************************/
+/***/ (() => {
+
+console.log('basket2.js');
+class BasketStateless extends HTMLElement {
+    constructor() {
+        super();
+        this.connectedCallbackHasBeenCalled = false;
+    }
+    connectedCallback() {
+        let props = JSON.parse(this.getAttribute('props'));
+        this.connectedCallbackHasBeenCalled = true;
+        let totalNumberDiv = document.createElement('div');
+        this.totalNumberDivRef = totalNumberDiv;
+        let totalNumberDivText = document.createTextNode(props.totalnumber);
+        totalNumberDiv.appendChild(totalNumberDivText);
+        let totalPriceDiv = document.createElement('div');
+        this.totalPriceDivRef = totalPriceDiv;
+        let totalPriceDivText = document.createTextNode(props.totalprice);
+        totalPriceDiv.appendChild(totalPriceDivText);
+        this.appendChild(totalNumberDiv);
+        this.appendChild(totalPriceDiv);
+    }
+    static get observedAttributes() {
+        return ['totalnumber', 'totalprice',];
+    }
+    attributeChangedCallback(attrName, oldVal, newVal) {
+        //console.log('BasketStateless attributeChangedCallback');
+        if (!this.connectedCallbackHasBeenCalled)
+            return;
+        //console.log('attrName: '+ attrName);
+        if (oldVal !== newVal) {
+            if (attrName === 'totalnumber') {
+                this.totalNumberDivRef.textContent = "Total number of items: " + newVal;
+            }
+            else if (attrName === 'totalprice') {
+                this.totalPriceDivRef.textContent = "Total Price:  $ " + newVal;
+            }
+            else {
+                console.log('??????????');
+                console.log(attrName);
+            }
+        }
+    }
+}
+customElements.define('basket-el2', BasketStateless);
+
+
 /***/ })
 
 /******/ 	});
@@ -18395,14 +18385,13 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-var exports = __webpack_exports__;
 /*!*************************!*\
   !*** ./src/js/index.ts ***!
   \*************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _myamazon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./myamazon.js */ "./src/js/myamazon.js");
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-var myamazon_js_1 = __webpack_require__(/*! ./myamazon.js */ "./src/js/myamazon.js");
-(0, myamazon_js_1.init)();
+(0,_myamazon_js__WEBPACK_IMPORTED_MODULE_0__.init)();
 
 })();
 
