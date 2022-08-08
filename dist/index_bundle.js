@@ -17648,55 +17648,6 @@ customElements.define('list-el', Item);
 
 /***/ }),
 
-/***/ "./src/js/store.js":
-/*!*************************!*\
-  !*** ./src/js/store.js ***!
-  \*************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
-
-console.log('store.js');
-
-
-
-class Store2 {
-  constructor(state) {
-    this.listeners = {};
-    this.state = state;
-  }
-  
-  register(prop, cb) {
-    if (!this.listeners[prop])
-      this.listeners[prop] = [];
-    
-    this.listeners[prop].push(cb);
-  }
-
-  get(prop) {
-    return this.state[prop];
-  }
-
-  set(prop, newVal) {
-    //console.log('store set');
-    this.state[prop] = newVal;
-    for (let f of this.listeners[prop]) {
-      f(newVal);
-    }
-  }
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Store2);
-
-
-/***/ }),
-
 /***/ "./src/css/myamazon.css":
 /*!******************************!*\
   !*** ./src/css/myamazon.css ***!
@@ -18129,7 +18080,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "init": () => (/* binding */ init),
 /* harmony export */   "store": () => (/* binding */ store)
 /* harmony export */ });
-/* harmony import */ var _store_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store.js */ "./src/js/store.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store */ "./src/js/store.ts");
 /* harmony import */ var _actionHandler_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actionHandler.js */ "./src/js/actionHandler.js");
 /* harmony import */ var _basket_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./basket.js */ "./src/js/basket.js");
 /* harmony import */ var _basket2_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./basket2.ts */ "./src/js/basket2.ts");
@@ -18139,7 +18090,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _css_myamazon_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../css/myamazon.css */ "./src/css/myamazon.css");
 console.log('myamazon.js');
 
-const store = new _store_js__WEBPACK_IMPORTED_MODULE_0__["default"]({
+const store = new _store__WEBPACK_IMPORTED_MODULE_0__["default"]({
     data: [
         { name: 'benjerry', price: 5.95, qtty: 0 },
         { name: 'caffelatte', price: 1.27, qtty: 0 },
@@ -18253,6 +18204,45 @@ function init() {
     render_list_of_items();
 }
 ;
+
+
+/***/ }),
+
+/***/ "./src/js/store.ts":
+/*!*************************!*\
+  !*** ./src/js/store.ts ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+
+console.log('store.js');
+class Store2 {
+    constructor(state) {
+        this.listeners = {};
+        this.state = state;
+    }
+    register(prop, cb) {
+        if (!this.listeners[prop])
+            this.listeners[prop] = [];
+        this.listeners[prop].push(cb);
+    }
+    get(prop) {
+        return this.state[prop];
+    }
+    set(prop, newVal) {
+        //console.log('store set');
+        this.state[prop] = newVal;
+        for (let f of this.listeners[prop]) {
+            f(newVal);
+        }
+    }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Store2);
 
 
 /***/ })

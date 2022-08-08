@@ -4,6 +4,9 @@ console.log('store.js');
 import _ from 'lodash';
 
 class Store2 {
+  listeners: {};
+  state: any;
+
   constructor(state) {
     this.listeners = {};
     this.state = state;

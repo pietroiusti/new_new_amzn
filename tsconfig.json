@@ -3,7 +3,13 @@
     "outDir": "./built",
     "allowJs": true,
     //"target": "es5"
-    "target": "es6"
+    "target": "es6",
+    "baseUrl": ".",
+    "paths": {
+      "lodash": ["node_modules/lodash/lodash"]
+    },
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   },
-  "include": ["./src/**/*"]
+  "include": ["./src/**/*"],
 }

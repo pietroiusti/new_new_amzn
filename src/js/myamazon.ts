@@ -1,6 +1,6 @@
 console.log('myamazon.js');
 
-import Store2 from './store.js';
+import Store2 from './store';
 export const store = new Store2(
                        {
                          data: [
