@@ -24,7 +24,7 @@ import './basket';
 
 import './basket2'
 
-import './card.js';
+import './card';
 
 import '../css/myamazon.css';
 

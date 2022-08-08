@@ -1,6 +1,10 @@
 console.log('card.js');
 
 class Item extends HTMLElement {
+  connectedCallbackHasBeenCalled: boolean;
+  props: { name: string; id: string; price: string; imgSrc: string; qtty: string; qttyRef: any; };
+  name: string;
+
   constructor() {
     super();
     this.connectedCallbackHasBeenCalled = false;
