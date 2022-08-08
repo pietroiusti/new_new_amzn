@@ -1,3 +1,3 @@
-import { init } from "./myamazon.js"
+import { init } from "./myamazon";
 
 init();

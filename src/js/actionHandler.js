@@ -1,6 +1,6 @@
 console.log('actionHandler.js');
 
-import { store } from "./myamazon.js";
+import { store } from "./myamazon";
 import _ from 'lodash';
 
 function actionHandler(obj) {

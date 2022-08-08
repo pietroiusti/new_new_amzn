@@ -4,7 +4,7 @@ import Store2 from './store.js';
 export const store = new Store2(
                        {
                          data: [
-                           {name: 'benjerry', price: 5.95, qtty: 0}, // <<<<<
+                           {name: 'benjerry', price: 5.95, qtty: 0},
                            {name: 'caffelatte', price: 1.27, qtty: 0},
                            {name: 'calippo', price: 4.10, qtty: 0},
                            {name: 'evax', price: 2.40, qtty: 0},
@@ -37,13 +37,13 @@ import '../css/myamazon.css';
 let itemList = document.getElementById('itemList');
 itemList.addEventListener('addItem', (e) => {
   //console.log('itemList event listener');
-  let parent = e.target.parentElement;
+  let parent = (<HTMLButtonElement>e.target).parentElement;
   let name = parent.id;
   actionHandler( {action: 'add', itemName: name} );
 });
 
 itemList.addEventListener('removeItem', (e) => {
-  let parent = event.target.parentElement;
+  let parent = (<HTMLButtonElement>e.target).parentElement;
   let name = parent.id;
   actionHandler( {action: 'remove', itemName: name} );
 });

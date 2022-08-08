@@ -17395,7 +17395,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "actionHandler": () => (/* binding */ actionHandler)
 /* harmony export */ });
-/* harmony import */ var _myamazon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./myamazon.js */ "./src/js/myamazon.js");
+/* harmony import */ var _myamazon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./myamazon */ "./src/js/myamazon.ts");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
 console.log('actionHandler.js');
@@ -17408,7 +17408,7 @@ function actionHandler(obj) {
   let itemName = obj.itemName;
   
   if (action === 'add') {
-    let data = _myamazon_js__WEBPACK_IMPORTED_MODULE_0__.store.get('data');
+    let data = _myamazon__WEBPACK_IMPORTED_MODULE_0__.store.get('data');
 
     let index; // CHECK: could you also .find() as well?
     for (let i = 0; i < data.length; i++) {
@@ -17438,9 +17438,9 @@ function actionHandler(obj) {
                                                                   // a
                                                                   // copy)
     data[index].qtty += 1; // update the copy
-    _myamazon_js__WEBPACK_IMPORTED_MODULE_0__.store.set('data', data); // use the copy to update data in store
+    _myamazon__WEBPACK_IMPORTED_MODULE_0__.store.set('data', data); // use the copy to update data in store
   } else if (action === 'remove') {
-    let data = _myamazon_js__WEBPACK_IMPORTED_MODULE_0__.store.get('data'); // get copy of data
+    let data = _myamazon__WEBPACK_IMPORTED_MODULE_0__.store.get('data'); // get copy of data
 
     let index; // CHECK: could you also .find() as well?
     for (let i = 0; i < data.length; i++) {
@@ -17453,7 +17453,7 @@ function actionHandler(obj) {
       let dataShallowCopy = [...data];
       dataShallowCopy[index] = lodash__WEBPACK_IMPORTED_MODULE_1___default().cloneDeep(dataShallowCopy[index]);
       dataShallowCopy[index].qtty -= 1;
-      _myamazon_js__WEBPACK_IMPORTED_MODULE_0__.store.set('data', dataShallowCopy);
+      _myamazon__WEBPACK_IMPORTED_MODULE_0__.store.set('data', dataShallowCopy);
     }
   } else {
     console.log('Error: Action unknown.');
@@ -17473,7 +17473,7 @@ function actionHandler(obj) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _myamazon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./myamazon.js */ "./src/js/myamazon.js");
+/* harmony import */ var _myamazon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./myamazon */ "./src/js/myamazon.ts");
 console.log('basket.js');
 
 
@@ -17481,7 +17481,7 @@ console.log('basket.js');
 class Basket extends HTMLElement {
   constructor() {
     super();
-    _myamazon_js__WEBPACK_IMPORTED_MODULE_0__.store.register('data', this.basketElCallback);
+    _myamazon__WEBPACK_IMPORTED_MODULE_0__.store.register('data', this.basketElCallback);
   }
 
   connectedCallback() {
@@ -17644,173 +17644,6 @@ class Item extends HTMLElement {
 }
 
 customElements.define('list-el', Item);
-
-
-/***/ }),
-
-/***/ "./src/js/myamazon.js":
-/*!****************************!*\
-  !*** ./src/js/myamazon.js ***!
-  \****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "init": () => (/* binding */ init),
-/* harmony export */   "store": () => (/* binding */ store)
-/* harmony export */ });
-/* harmony import */ var _store_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store.js */ "./src/js/store.js");
-/* harmony import */ var _actionHandler_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actionHandler.js */ "./src/js/actionHandler.js");
-/* harmony import */ var _basket_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./basket.js */ "./src/js/basket.js");
-/* harmony import */ var _basket2_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./basket2.ts */ "./src/js/basket2.ts");
-/* harmony import */ var _basket2_ts__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_basket2_ts__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _card_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./card.js */ "./src/js/card.js");
-/* harmony import */ var _card_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_card_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _css_myamazon_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../css/myamazon.css */ "./src/css/myamazon.css");
-console.log('myamazon.js');
-
-
-const store = new _store_js__WEBPACK_IMPORTED_MODULE_0__["default"](
-                       {
-                         data: [
-                           {name: 'benjerry', price: 5.95, qtty: 0}, // <<<<<
-                           {name: 'caffelatte', price: 1.27, qtty: 0},
-                           {name: 'calippo', price: 4.10, qtty: 0},
-                           {name: 'evax', price: 2.40, qtty: 0},
-                           {name: 'pizza', price: 4.95, qtty: 0},
-                           {name: 'scottex', price: 4.50, qtty: 0},
-                           {name: 'spaghetti', price: 1.25, qtty: 0},
-                           {name: 'triangulos', price: 2.35, qtty: 0},
-                           {name: 'xibeca', price: 3.75, qtty: 0},
-                           {name: 'chipsahoy', price: 2.20, qtty: 0},
-                         ]
-                       },
-                      );
-
-
-
-
-
-
-
-
-
-
-
-//import { hello } from "./test.js";
-
-//hello();
-
-// Make list of items (cards) listen to the custom events ('addItem'
-// and 'removeItem') emitted by the buttons.
-let itemList = document.getElementById('itemList');
-itemList.addEventListener('addItem', (e) => {
-  //console.log('itemList event listener');
-  let parent = e.target.parentElement;
-  let name = parent.id;
-  (0,_actionHandler_js__WEBPACK_IMPORTED_MODULE_1__.actionHandler)( {action: 'add', itemName: name} );
-});
-
-itemList.addEventListener('removeItem', (e) => {
-  let parent = event.target.parentElement;
-  let name = parent.id;
-  (0,_actionHandler_js__WEBPACK_IMPORTED_MODULE_1__.actionHandler)( {action: 'remove', itemName: name} );
-});
-
-// stateless basket
-function renderBasket2() {
-  //console.log('renderBasket2');
-  let data = store.get('data');
-  let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
-  let totalPrice = data.reduce((acc, a) => acc + a.qtty*a.price, 0);
-  totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
-
-  let basketDiv = document.getElementById('basketDiv2');
-  let basket = document.createElement('basket-el2');
-  basket.setAttribute('totalnumber', 'Total number of items: ' + totalNumber);
-  basket.setAttribute('totalprice', 'Total Price:  $ ' + totalPrice);
-
-  let propObj = {
-    totalnumber: 'Total number of items: 0',
-    totalprice: 'Total Price: 0.00 $',
-  };
-  basket.setAttribute('props', JSON.stringify(propObj));
-
-  basketDiv.appendChild(basket);
-}
-
-// stateful basket
-function renderBasket() {
-  //console.log('renderBasket');
-  let basketDiv = document.getElementById('basketDiv');
-  let basket = document.createElement('basket-el');
-  basket.setAttribute('totalnumber', 'Total number of items: 0');
-  basket.setAttribute('totalprice', 'Total Price: 0.00 $');
-  basketDiv.appendChild(basket);
-}
-
-function render_list_of_items() {
-  let data = store.get('data');
-  //console.log('render_list_of_items');
-  //console.log(data);
-  let itemList = document.getElementById('itemList');
-  for (let i = 0; i < data.length; i++) {
-    let name = data[i].name;
-    let item = document.createElement('list-el');
-
-    item.setAttribute('name', name);
-    item.setAttribute('price', data[i].price);
-    item.setAttribute('imgSrc', `../src/img/${name}.jpg`);
-    item.setAttribute('qtty', data[i].qtty);
-    itemList.appendChild(item);
-  }
-}
-
-store.register('data', listElCallback2);
-store.register('data', basketElCallback2); //<< stateless basket listener.
-// The listener for the stateful basket is registered by the basket itself
-
-function basketElCallback2(data) {
-  //console.log('basketElCallback2');
-
-  let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
-  let totalPrice = data.reduce((acc, a) => acc + a.qtty*a.price, 0);
-  totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
-
-  let statelessBasket = document.getElementsByTagName('basket-el2')[0];
-
-  //console.log(statelessBasket);
-
-  //console.log('setting totalNumber attribute for statelessBasket');
-  statelessBasket.setAttribute('totalNumber', totalNumber);
-  //console.log('setting totalprice attribute for statelessBasket');
-  statelessBasket.setAttribute('totalPrice', totalPrice);
-}
-
-function listElCallback2(data) {
-  //console.log('listElCallback2');
-  let itemList = document.getElementById('itemList');
-  for (let i = 0; i < itemList.children.length; i++) {
-    //console.log(itemList.children[i]);
-    let item = itemList.children[i];
-    item.setAttribute('qtty', data[i].qtty); // this relies on the
-                                             // fact that data and
-                                             // itemList have the same
-                                             // members in the same
-                                             // order.
-  }
-}
-
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-function init() {
-  renderBasket();
-  renderBasket2();
-  render_list_of_items();
-};
 
 
 /***/ }),
@@ -18282,6 +18115,146 @@ class BasketStateless extends HTMLElement {
 customElements.define('basket-el2', BasketStateless);
 
 
+/***/ }),
+
+/***/ "./src/js/myamazon.ts":
+/*!****************************!*\
+  !*** ./src/js/myamazon.ts ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "init": () => (/* binding */ init),
+/* harmony export */   "store": () => (/* binding */ store)
+/* harmony export */ });
+/* harmony import */ var _store_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store.js */ "./src/js/store.js");
+/* harmony import */ var _actionHandler_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actionHandler.js */ "./src/js/actionHandler.js");
+/* harmony import */ var _basket_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./basket.js */ "./src/js/basket.js");
+/* harmony import */ var _basket2_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./basket2.ts */ "./src/js/basket2.ts");
+/* harmony import */ var _basket2_ts__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_basket2_ts__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _card_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./card.js */ "./src/js/card.js");
+/* harmony import */ var _card_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_card_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _css_myamazon_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../css/myamazon.css */ "./src/css/myamazon.css");
+console.log('myamazon.js');
+
+const store = new _store_js__WEBPACK_IMPORTED_MODULE_0__["default"]({
+    data: [
+        { name: 'benjerry', price: 5.95, qtty: 0 },
+        { name: 'caffelatte', price: 1.27, qtty: 0 },
+        { name: 'calippo', price: 4.10, qtty: 0 },
+        { name: 'evax', price: 2.40, qtty: 0 },
+        { name: 'pizza', price: 4.95, qtty: 0 },
+        { name: 'scottex', price: 4.50, qtty: 0 },
+        { name: 'spaghetti', price: 1.25, qtty: 0 },
+        { name: 'triangulos', price: 2.35, qtty: 0 },
+        { name: 'xibeca', price: 3.75, qtty: 0 },
+        { name: 'chipsahoy', price: 2.20, qtty: 0 },
+    ]
+});
+
+
+
+
+
+//import { hello } from "./test.js";
+//hello();
+// Make list of items (cards) listen to the custom events ('addItem'
+// and 'removeItem') emitted by the buttons.
+let itemList = document.getElementById('itemList');
+itemList.addEventListener('addItem', (e) => {
+    //console.log('itemList event listener');
+    let parent = e.target.parentElement;
+    let name = parent.id;
+    (0,_actionHandler_js__WEBPACK_IMPORTED_MODULE_1__.actionHandler)({ action: 'add', itemName: name });
+});
+itemList.addEventListener('removeItem', (e) => {
+    let parent = e.target.parentElement;
+    let name = parent.id;
+    (0,_actionHandler_js__WEBPACK_IMPORTED_MODULE_1__.actionHandler)({ action: 'remove', itemName: name });
+});
+// stateless basket
+function renderBasket2() {
+    //console.log('renderBasket2');
+    let data = store.get('data');
+    let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
+    let totalPrice = data.reduce((acc, a) => acc + a.qtty * a.price, 0);
+    totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
+    let basketDiv = document.getElementById('basketDiv2');
+    let basket = document.createElement('basket-el2');
+    basket.setAttribute('totalnumber', 'Total number of items: ' + totalNumber);
+    basket.setAttribute('totalprice', 'Total Price:  $ ' + totalPrice);
+    let propObj = {
+        totalnumber: 'Total number of items: 0',
+        totalprice: 'Total Price: 0.00 $',
+    };
+    basket.setAttribute('props', JSON.stringify(propObj));
+    basketDiv.appendChild(basket);
+}
+// stateful basket
+function renderBasket() {
+    //console.log('renderBasket');
+    let basketDiv = document.getElementById('basketDiv');
+    let basket = document.createElement('basket-el');
+    basket.setAttribute('totalnumber', 'Total number of items: 0');
+    basket.setAttribute('totalprice', 'Total Price: 0.00 $');
+    basketDiv.appendChild(basket);
+}
+function render_list_of_items() {
+    let data = store.get('data');
+    //console.log('render_list_of_items');
+    //console.log(data);
+    let itemList = document.getElementById('itemList');
+    for (let i = 0; i < data.length; i++) {
+        let name = data[i].name;
+        let item = document.createElement('list-el');
+        item.setAttribute('name', name);
+        item.setAttribute('price', data[i].price);
+        item.setAttribute('imgSrc', `../src/img/${name}.jpg`);
+        item.setAttribute('qtty', data[i].qtty);
+        itemList.appendChild(item);
+    }
+}
+store.register('data', listElCallback2);
+store.register('data', basketElCallback2); //<< stateless basket listener.
+// The listener for the stateful basket is registered by the basket itself
+function basketElCallback2(data) {
+    //console.log('basketElCallback2');
+    let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
+    let totalPrice = data.reduce((acc, a) => acc + a.qtty * a.price, 0);
+    totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
+    let statelessBasket = document.getElementsByTagName('basket-el2')[0];
+    //console.log(statelessBasket);
+    //console.log('setting totalNumber attribute for statelessBasket');
+    statelessBasket.setAttribute('totalNumber', totalNumber);
+    //console.log('setting totalprice attribute for statelessBasket');
+    statelessBasket.setAttribute('totalPrice', totalPrice);
+}
+function listElCallback2(data) {
+    //console.log('listElCallback2');
+    let itemList = document.getElementById('itemList');
+    for (let i = 0; i < itemList.children.length; i++) {
+        //console.log(itemList.children[i]);
+        let item = itemList.children[i];
+        item.setAttribute('qtty', data[i].qtty); // this relies on the
+        // fact that data and
+        // itemList have the same
+        // members in the same
+        // order.
+    }
+}
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+function init() {
+    renderBasket();
+    renderBasket2();
+    render_list_of_items();
+}
+;
+
+
 /***/ })
 
 /******/ 	});
@@ -18389,9 +18362,9 @@ var __webpack_exports__ = {};
   !*** ./src/js/index.ts ***!
   \*************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _myamazon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./myamazon.js */ "./src/js/myamazon.js");
+/* harmony import */ var _myamazon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./myamazon */ "./src/js/myamazon.ts");
 
-(0,_myamazon_js__WEBPACK_IMPORTED_MODULE_0__.init)();
+(0,_myamazon__WEBPACK_IMPORTED_MODULE_0__.init)();
 
 })();
 

@@ -1,6 +1,6 @@
 console.log('basket.js');
 
-import { store } from "./myamazon.js";
+import { store } from "./myamazon";
 
 class Basket extends HTMLElement {
   constructor() {
