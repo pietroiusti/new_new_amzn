@@ -3,14 +3,14 @@ console.log('actionHandler.js');
 import { store } from "./myamazon";
 import _ from 'lodash';
 
-function actionHandler(obj) {
+function actionHandler(obj: { action: any; itemName: any; }) {
   let action = obj.action;
   let itemName = obj.itemName;
   
   if (action === 'add') {
     let data = store.get('data');
 
-    let index; // CHECK: could you also .find() as well?
+    let index: number; // CHECK: could you also .find() as well?
     for (let i = 0; i < data.length; i++) {
       if (data[i].name === itemName) {
         index = i;
@@ -42,7 +42,7 @@ function actionHandler(obj) {
   } else if (action === 'remove') {
     let data = store.get('data'); // get copy of data
 
-    let index; // CHECK: could you also .find() as well?
+    let index: number; // CHECK: could you also .find() as well?
     for (let i = 0; i < data.length; i++) {
       if (data[i].name === itemName) {
         index = i;

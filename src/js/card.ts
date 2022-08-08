@@ -88,13 +88,13 @@ class Item extends HTMLElement {
     this.append(item);
   }
 
-  handleClickAdd(event) {
+  handleClickAdd(event: MouseEvent) {
     //event.target => button
     const customEvent = new CustomEvent('addItem', { bubbles: true });
     event.target.dispatchEvent(customEvent);
   }
 
-  handleClickRemove(event) {
+  handleClickRemove(event: MouseEvent) {
     //event.target => button
     const customEvent = new CustomEvent('removeItem', { bubbles: true });
     event.target.dispatchEvent(customEvent);
@@ -104,7 +104,7 @@ class Item extends HTMLElement {
     return ['qtty', ];
   }
 
-  attributeChangedCallback(attrName, oldVal, newVal) {
+  attributeChangedCallback(attrName: string, oldVal: any, newVal: any) {
     //console.log('Item attributeChangedCallback');
     if (!this.connectedCallbackHasBeenCalled) {
       return;

@@ -31,7 +31,7 @@ class BasketStateless extends HTMLElement {
     return [ 'totalnumber', 'totalprice', ];
   }
 
-  attributeChangedCallback(attrName, oldVal, newVal) {
+  attributeChangedCallback(attrName: string, oldVal: any, newVal: string) {
     //console.log('BasketStateless attributeChangedCallback');
 
     if (!this.connectedCallbackHasBeenCalled)

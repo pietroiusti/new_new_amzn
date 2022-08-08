@@ -52,8 +52,8 @@ itemList.addEventListener('removeItem', (e) => {
 function renderBasket2() {
   //console.log('renderBasket2');
   let data = store.get('data');
-  let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
-  let totalPrice = data.reduce((acc, a) => acc + a.qtty*a.price, 0);
+  let totalNumber = data.reduce((acc: any, a: { qtty: any; }) => acc + a.qtty, 0);
+  let totalPrice = data.reduce((acc: number, a: { qtty: number; price: number; }) => acc + a.qtty*a.price, 0);
   totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
 
   let basketDiv = document.getElementById('basketDiv2');
@@ -101,11 +101,11 @@ store.register('data', listElCallback2);
 store.register('data', basketElCallback2); //<< stateless basket listener.
 // The listener for the stateful basket is registered by the basket itself
 
-function basketElCallback2(data) {
+function basketElCallback2(data: any[]) {
   //console.log('basketElCallback2');
 
-  let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
-  let totalPrice = data.reduce((acc, a) => acc + a.qtty*a.price, 0);
+  let totalNumber = data.reduce((acc: any, a: { qtty: any; }) => acc + a.qtty, 0);
+  let totalPrice = data.reduce((acc: number, a: { qtty: number; price: number; }) => acc + a.qtty*a.price, 0);
   totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
 
   let statelessBasket = document.getElementsByTagName('basket-el2')[0];
@@ -118,7 +118,7 @@ function basketElCallback2(data) {
   statelessBasket.setAttribute('totalPrice', totalPrice);
 }
 
-function listElCallback2(data) {
+function listElCallback2(data: { qtty: string; }[]) {
   //console.log('listElCallback2');
   let itemList = document.getElementById('itemList');
   for (let i = 0; i < itemList.children.length; i++) {
@@ -132,7 +132,7 @@ function listElCallback2(data) {
   }
 }
 
-function capitalizeFirstLetter(string) {
+function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 

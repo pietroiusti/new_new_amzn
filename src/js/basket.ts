@@ -27,11 +27,11 @@ class Basket extends HTMLElement {
     this.appendChild(totalPriceDiv);
   }
 
-  basketElCallback(data) {
+  basketElCallback(data: any[]) {
     //console.log('basketElCallback');
 
-    let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
-    let totalPrice = data.reduce((acc, a) => acc + a.qtty*a.price, 0);
+    let totalNumber = data.reduce((acc: any, a: { qtty: any; }) => acc + a.qtty, 0);
+    let totalPrice = data.reduce((acc: number, a: { qtty: number; price: number; }) => acc + a.qtty*a.price, 0);
     totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
 
     let basket = document.getElementsByTagName('basket-el')[0];
