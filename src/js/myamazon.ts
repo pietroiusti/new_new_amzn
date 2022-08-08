@@ -20,9 +20,9 @@ export const store = new Store2(
 
 import { actionHandler } from './actionHandler';
 
-import './basket.js';
+import './basket';
 
-import './basket2.ts'
+import './basket2'
 
 import './card.js';
 

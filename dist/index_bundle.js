@@ -17384,62 +17384,6 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
-/***/ "./src/js/basket.js":
-/*!**************************!*\
-  !*** ./src/js/basket.js ***!
-  \**************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _myamazon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./myamazon */ "./src/js/myamazon.ts");
-console.log('basket.js');
-
-
-
-class Basket extends HTMLElement {
-  constructor() {
-    super();
-    _myamazon__WEBPACK_IMPORTED_MODULE_0__.store.register('data', this.basketElCallback);
-  }
-
-  connectedCallback() {
-    // OLD:
-    // this.innerHTML = `
-    //     <div id="totalNumberDiv">Total number of items: 0</div>
-    //     <div id="totalPriceDiv">Total Price: 0.00 $</div>
-    // `;
-    // USE DOM MANIPULATION INSTEAD:
-    let totalNumberDiv = document.createElement('div');
-    let totalNumberDivText = document.createTextNode('Total number of items: 0');
-    totalNumberDiv.appendChild(totalNumberDivText);
-
-    let totalPriceDiv = document.createElement('div');
-    let totalPriceDivText = document.createTextNode('Total Price: 0.00 $');
-    totalPriceDiv.appendChild(totalPriceDivText);
-
-    this.appendChild(totalNumberDiv);
-    this.appendChild(totalPriceDiv);
-  }
-
-  basketElCallback(data) {
-    //console.log('basketElCallback');
-
-    let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
-    let totalPrice = data.reduce((acc, a) => acc + a.qtty*a.price, 0);
-    totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
-
-    let basket = document.getElementsByTagName('basket-el')[0];
-    basket.children[0].textContent = 'Total number of items: ' + totalNumber;
-    basket.children[1].textContent = 'Total Price: ' + totalPrice + '$';
-  }
-}
-
-customElements.define('basket-el', Basket);
-
-
-/***/ }),
-
 /***/ "./src/js/card.js":
 /*!************************!*\
   !*** ./src/js/card.js ***!
@@ -18008,6 +17952,53 @@ function actionHandler(obj) {
 
 /***/ }),
 
+/***/ "./src/js/basket.ts":
+/*!**************************!*\
+  !*** ./src/js/basket.ts ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _myamazon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./myamazon */ "./src/js/myamazon.ts");
+console.log('basket.js');
+
+class Basket extends HTMLElement {
+    constructor() {
+        super();
+        _myamazon__WEBPACK_IMPORTED_MODULE_0__.store.register('data', this.basketElCallback);
+    }
+    connectedCallback() {
+        // OLD:
+        // this.innerHTML = `
+        //     <div id="totalNumberDiv">Total number of items: 0</div>
+        //     <div id="totalPriceDiv">Total Price: 0.00 $</div>
+        // `;
+        // USE DOM MANIPULATION INSTEAD:
+        let totalNumberDiv = document.createElement('div');
+        let totalNumberDivText = document.createTextNode('Total number of items: 0');
+        totalNumberDiv.appendChild(totalNumberDivText);
+        let totalPriceDiv = document.createElement('div');
+        let totalPriceDivText = document.createTextNode('Total Price: 0.00 $');
+        totalPriceDiv.appendChild(totalPriceDivText);
+        this.appendChild(totalNumberDiv);
+        this.appendChild(totalPriceDiv);
+    }
+    basketElCallback(data) {
+        //console.log('basketElCallback');
+        let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
+        let totalPrice = data.reduce((acc, a) => acc + a.qtty * a.price, 0);
+        totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
+        let basket = document.getElementsByTagName('basket-el')[0];
+        basket.children[0].textContent = 'Total number of items: ' + totalNumber;
+        basket.children[1].textContent = 'Total Price: ' + totalPrice + '$';
+    }
+}
+customElements.define('basket-el', Basket);
+
+
+/***/ }),
+
 /***/ "./src/js/basket2.ts":
 /*!***************************!*\
   !*** ./src/js/basket2.ts ***!
@@ -18075,9 +18066,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store */ "./src/js/store.ts");
 /* harmony import */ var _actionHandler__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actionHandler */ "./src/js/actionHandler.ts");
-/* harmony import */ var _basket_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./basket.js */ "./src/js/basket.js");
-/* harmony import */ var _basket2_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./basket2.ts */ "./src/js/basket2.ts");
-/* harmony import */ var _basket2_ts__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_basket2_ts__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _basket__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./basket */ "./src/js/basket.ts");
+/* harmony import */ var _basket2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./basket2 */ "./src/js/basket2.ts");
+/* harmony import */ var _basket2__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_basket2__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _card_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./card.js */ "./src/js/card.js");
 /* harmony import */ var _card_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_card_js__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _css_myamazon_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../css/myamazon.css */ "./src/css/myamazon.css");
