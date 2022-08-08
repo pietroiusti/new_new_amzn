@@ -11,8 +11,8 @@ module.exports = {
     extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"],
   },
   entry: {
-    index: './src/js/index.js',
-    helloEntry: './src/js/test.js',
+    index: './src/js/index.ts',
+    helloEntry: './src/js/test.ts',
   },
   //before: entry: './src/js/index.js',
   output: {

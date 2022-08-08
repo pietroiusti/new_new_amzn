@@ -18395,14 +18395,14 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
+var exports = __webpack_exports__;
 /*!*************************!*\
-  !*** ./src/js/index.js ***!
+  !*** ./src/js/index.ts ***!
   \*************************/
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _myamazon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./myamazon.js */ "./src/js/myamazon.js");
 
-
-(0,_myamazon_js__WEBPACK_IMPORTED_MODULE_0__.init)();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var myamazon_js_1 = __webpack_require__(/*! ./myamazon.js */ "./src/js/myamazon.js");
+(0, myamazon_js_1.init)();
 
 })();
 
