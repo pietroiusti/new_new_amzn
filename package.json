@@ -26,6 +26,8 @@
     "webpack-dev-server": "^4.9.3"
   },
   "dependencies": {
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "source-map-loader": "^4.0.0",
+    "ts-loader": "^9.3.1"
   }
 }

@@ -7,6 +7,9 @@ module.exports = {
   mode: 'development',
   //devtool: 'inline-source-map', // option best for development, map is put in the bundle
   devtool: 'source-map', // good for production, map is put in a different file
+  resolve: {
+    extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"],
+  },
   entry: {
     index: './src/js/index.js',
     helloEntry: './src/js/test.js',
@@ -18,6 +21,8 @@ module.exports = {
   },
   module: {
     rules: [
+      { test: /\.tsx?$/, loader: "ts-loader" },
+      { test: /\.js$/, loader: "source-map-loader" },
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
