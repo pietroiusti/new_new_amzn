@@ -18,7 +18,7 @@ export const store = new Store2(
                        },
                       );
 
-import { actionHandler } from './actionHandler.js';
+import { actionHandler } from './actionHandler';
 
 import './basket.js';
 

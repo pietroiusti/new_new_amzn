@@ -17384,87 +17384,6 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
-/***/ "./src/js/actionHandler.js":
-/*!*********************************!*\
-  !*** ./src/js/actionHandler.js ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "actionHandler": () => (/* binding */ actionHandler)
-/* harmony export */ });
-/* harmony import */ var _myamazon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./myamazon */ "./src/js/myamazon.ts");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-console.log('actionHandler.js');
-
-
-
-
-function actionHandler(obj) {
-  let action = obj.action;
-  let itemName = obj.itemName;
-  
-  if (action === 'add') {
-    let data = _myamazon__WEBPACK_IMPORTED_MODULE_0__.store.get('data');
-
-    let index; // CHECK: could you also .find() as well?
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].name === itemName) {
-        index = i;
-      }
-    }
-    
-    //console.log('old data:');
-    //console.log(data); //<<<<<<< updated??? why?
-
-    let dataShallowCopy = [...data]; // create a new array, with the
-                                     // same references that are
-                                     // inside data.
-    // The modified shallow copy will be passed to the store. We do
-    // so, because other components can check whether data has changed
-    // just by comparing the references.
-    dataShallowCopy[index] = lodash__WEBPACK_IMPORTED_MODULE_1___default().cloneDeep(dataShallowCopy[index]); // change
-                                                                  // one
-                                                                  // of
-                                                                  // the
-                                                                  // references
-                                                                  // (make
-                                                                  // it
-                                                                  // point
-                                                                  // to
-                                                                  // a
-                                                                  // copy)
-    data[index].qtty += 1; // update the copy
-    _myamazon__WEBPACK_IMPORTED_MODULE_0__.store.set('data', data); // use the copy to update data in store
-  } else if (action === 'remove') {
-    let data = _myamazon__WEBPACK_IMPORTED_MODULE_0__.store.get('data'); // get copy of data
-
-    let index; // CHECK: could you also .find() as well?
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].name === itemName) {
-        index = i;
-      }
-    }
-
-    if (data[index].qtty > 0) {
-      let dataShallowCopy = [...data];
-      dataShallowCopy[index] = lodash__WEBPACK_IMPORTED_MODULE_1___default().cloneDeep(dataShallowCopy[index]);
-      dataShallowCopy[index].qtty -= 1;
-      _myamazon__WEBPACK_IMPORTED_MODULE_0__.store.set('data', dataShallowCopy);
-    }
-  } else {
-    console.log('Error: Action unknown.');
-  }
-}
-
-
-
-
-/***/ }),
-
 /***/ "./src/js/basket.js":
 /*!**************************!*\
   !*** ./src/js/basket.js ***!
@@ -18015,6 +17934,80 @@ module.exports = styleTagTransform;
 
 /***/ }),
 
+/***/ "./src/js/actionHandler.ts":
+/*!*********************************!*\
+  !*** ./src/js/actionHandler.ts ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "actionHandler": () => (/* binding */ actionHandler)
+/* harmony export */ });
+/* harmony import */ var _myamazon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./myamazon */ "./src/js/myamazon.ts");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+console.log('actionHandler.js');
+
+
+function actionHandler(obj) {
+    let action = obj.action;
+    let itemName = obj.itemName;
+    if (action === 'add') {
+        let data = _myamazon__WEBPACK_IMPORTED_MODULE_0__.store.get('data');
+        let index; // CHECK: could you also .find() as well?
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].name === itemName) {
+                index = i;
+            }
+        }
+        //console.log('old data:');
+        //console.log(data); //<<<<<<< updated??? why?
+        let dataShallowCopy = [...data]; // create a new array, with the
+        // same references that are
+        // inside data.
+        // The modified shallow copy will be passed to the store. We do
+        // so, because other components can check whether data has changed
+        // just by comparing the references.
+        dataShallowCopy[index] = lodash__WEBPACK_IMPORTED_MODULE_1___default().cloneDeep(dataShallowCopy[index]); // change
+        // one
+        // of
+        // the
+        // references
+        // (make
+        // it
+        // point
+        // to
+        // a
+        // copy)
+        data[index].qtty += 1; // update the copy
+        _myamazon__WEBPACK_IMPORTED_MODULE_0__.store.set('data', data); // use the copy to update data in store
+    }
+    else if (action === 'remove') {
+        let data = _myamazon__WEBPACK_IMPORTED_MODULE_0__.store.get('data'); // get copy of data
+        let index; // CHECK: could you also .find() as well?
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].name === itemName) {
+                index = i;
+            }
+        }
+        if (data[index].qtty > 0) {
+            let dataShallowCopy = [...data];
+            dataShallowCopy[index] = lodash__WEBPACK_IMPORTED_MODULE_1___default().cloneDeep(dataShallowCopy[index]);
+            dataShallowCopy[index].qtty -= 1;
+            _myamazon__WEBPACK_IMPORTED_MODULE_0__.store.set('data', dataShallowCopy);
+        }
+    }
+    else {
+        console.log('Error: Action unknown.');
+    }
+}
+
+
+
+/***/ }),
+
 /***/ "./src/js/basket2.ts":
 /*!***************************!*\
   !*** ./src/js/basket2.ts ***!
@@ -18081,7 +18074,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "store": () => (/* binding */ store)
 /* harmony export */ });
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store */ "./src/js/store.ts");
-/* harmony import */ var _actionHandler_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actionHandler.js */ "./src/js/actionHandler.js");
+/* harmony import */ var _actionHandler__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./actionHandler */ "./src/js/actionHandler.ts");
 /* harmony import */ var _basket_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./basket.js */ "./src/js/basket.js");
 /* harmony import */ var _basket2_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./basket2.ts */ "./src/js/basket2.ts");
 /* harmony import */ var _basket2_ts__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_basket2_ts__WEBPACK_IMPORTED_MODULE_3__);
@@ -18118,12 +18111,12 @@ itemList.addEventListener('addItem', (e) => {
     //console.log('itemList event listener');
     let parent = e.target.parentElement;
     let name = parent.id;
-    (0,_actionHandler_js__WEBPACK_IMPORTED_MODULE_1__.actionHandler)({ action: 'add', itemName: name });
+    (0,_actionHandler__WEBPACK_IMPORTED_MODULE_1__.actionHandler)({ action: 'add', itemName: name });
 });
 itemList.addEventListener('removeItem', (e) => {
     let parent = e.target.parentElement;
     let name = parent.id;
-    (0,_actionHandler_js__WEBPACK_IMPORTED_MODULE_1__.actionHandler)({ action: 'remove', itemName: name });
+    (0,_actionHandler__WEBPACK_IMPORTED_MODULE_1__.actionHandler)({ action: 'remove', itemName: name });
 });
 // stateless basket
 function renderBasket2() {
