@@ -2,7 +2,14 @@ console.log('card.js');
 
 class Item extends HTMLElement {
   connectedCallbackHasBeenCalled: boolean;
-  props: { name: string; id: string; price: string; imgSrc: string; qtty: string; qttyRef: any; };
+  props: {
+            name: string;
+            id: string;
+            price: string;
+            imgSrc: string;
+            qtty: string;
+            qttyRef: HTMLDivElement | null ;
+         };
   name: string;
 
   constructor() {

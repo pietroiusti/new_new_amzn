@@ -1,6 +1,13 @@
 console.log('myamazon.js');
 
 import Store2 from './store';
+
+type Item = {
+  name: string,
+  price: number,
+  qtty: number,
+}
+
 export const store = new Store2(
                        {
                          data: [
@@ -101,12 +108,12 @@ store.register('data', listElCallback2);
 store.register('data', basketElCallback2); //<< stateless basket listener.
 // The listener for the stateful basket is registered by the basket itself
 
-function basketElCallback2(data: any[]): void {
+function basketElCallback2(data: Item[]): void {
   //console.log('basketElCallback2');
 
   let totalNumber = data.reduce((acc: any, a: { qtty: any; }) => acc + a.qtty, 0);
   let totalPrice = data.reduce((acc: number, a: { qtty: number; price: number; }) => acc + a.qtty*a.price, 0);
-  totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
+  let totalPriceString = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
 
   let statelessBasket = document.getElementsByTagName('basket-el2')[0];
 
@@ -115,16 +122,16 @@ function basketElCallback2(data: any[]): void {
   //console.log('setting totalNumber attribute for statelessBasket');
   statelessBasket.setAttribute('totalNumber', totalNumber);
   //console.log('setting totalprice attribute for statelessBasket');
-  statelessBasket.setAttribute('totalPrice', totalPrice);
+  statelessBasket.setAttribute('totalPrice', totalPriceString);
 }
 
-function listElCallback2(data: { qtty: string; }[]) {
+function listElCallback2(data: Item[]) {
   //console.log('listElCallback2');
   let itemList = document.getElementById('itemList');
   for (let i = 0; i < itemList.children.length; i++) {
     //console.log(itemList.children[i]);
     let item = itemList.children[i];
-    item.setAttribute('qtty', data[i].qtty); // this relies on the
+    item.setAttribute('qtty', data[i].qtty.toString()); // this relies on the
                                              // fact that data and
                                              // itemList have the same
                                              // members in the same
