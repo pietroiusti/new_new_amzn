@@ -3,11 +3,20 @@ console.log('store.js');
 
 import _ from 'lodash';
 
-class Store2 {
-  listeners: {};
-  state: any;
+//interface ItemI { name: string, price: number, qtty: number };
+import { Item } from './myamazon';
 
-  constructor(state: { data: { name: string; price: number; qtty: number; }[]; }) {
+interface State {
+  data: Item[];
+};
+
+class Store2 {
+  listeners: {[key:string]:Function[]};// listeners is an object with an undefined number
+                                       // of members whose names are strings (rather than
+                                       // numbers or symbols) and whose values are functions
+  state: State;
+
+  constructor(state: State) {
     this.listeners = {};
     this.state = state;
   }

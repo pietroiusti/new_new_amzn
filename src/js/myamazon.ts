@@ -2,7 +2,7 @@ console.log('myamazon.js');
 
 import Store2 from './store';
 
-type Item = {
+export type Item = {
   name: string,
   price: number,
   qtty: number,
