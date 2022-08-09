@@ -3,7 +3,7 @@ console.log('actionHandler.js');
 import { store } from "./myamazon";
 import _ from 'lodash';
 
-function actionHandler(obj: { action: any; itemName: any; }) {
+function actionHandler(obj: { action: string; itemName: string; }): void {
   let action = obj.action;
   let itemName = obj.itemName;
   
@@ -40,7 +40,7 @@ function actionHandler(obj: { action: any; itemName: any; }) {
     data[index].qtty += 1; // update the copy
     store.set('data', data); // use the copy to update data in store
   } else if (action === 'remove') {
-    let data = store.get('data'); // get copy of data
+    let data = store.get('data');
 
     let index: number; // CHECK: could you also .find() as well?
     for (let i = 0; i < data.length; i++) {
