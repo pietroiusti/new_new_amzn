@@ -35,21 +35,21 @@ import '../css/myamazon.css';
 // Make list of items (cards) listen to the custom events ('addItem'
 // and 'removeItem') emitted by the buttons.
 let itemList = document.getElementById('itemList');
-itemList.addEventListener('addItem', (e) => {
+itemList.addEventListener('addItem', (e: Event): void => {
   //console.log('itemList event listener');
   let parent = (<HTMLButtonElement>e.target).parentElement;
   let name = parent.id;
   actionHandler( {action: 'add', itemName: name} );
 });
 
-itemList.addEventListener('removeItem', (e) => {
+itemList.addEventListener('removeItem', (e: Event): void => {
   let parent = (<HTMLButtonElement>e.target).parentElement;
   let name = parent.id;
   actionHandler( {action: 'remove', itemName: name} );
 });
 
 // stateless basket
-function renderBasket2() {
+function renderBasket2(): void {
   //console.log('renderBasket2');
   let data = store.get('data');
   let totalNumber = data.reduce((acc: any, a: { qtty: any; }) => acc + a.qtty, 0);
@@ -71,7 +71,7 @@ function renderBasket2() {
 }
 
 // stateful basket
-function renderBasket() {
+function renderBasket(): void {
   //console.log('renderBasket');
   let basketDiv = document.getElementById('basketDiv');
   let basket = document.createElement('basket-el');
@@ -80,7 +80,7 @@ function renderBasket() {
   basketDiv.appendChild(basket);
 }
 
-function render_list_of_items() {
+function render_list_of_items(): void {
   let data = store.get('data');
   //console.log('render_list_of_items');
   //console.log(data);
@@ -101,7 +101,7 @@ store.register('data', listElCallback2);
 store.register('data', basketElCallback2); //<< stateless basket listener.
 // The listener for the stateful basket is registered by the basket itself
 
-function basketElCallback2(data: any[]) {
+function basketElCallback2(data: any[]): void {
   //console.log('basketElCallback2');
 
   let totalNumber = data.reduce((acc: any, a: { qtty: any; }) => acc + a.qtty, 0);
@@ -132,11 +132,11 @@ function listElCallback2(data: { qtty: string; }[]) {
   }
 }
 
-function capitalizeFirstLetter(string: string) {
+function capitalizeFirstLetter(string: string): string {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export function init() {
+export function init(): void {
   renderBasket();
   renderBasket2();
   render_list_of_items();
