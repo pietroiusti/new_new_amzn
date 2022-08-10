@@ -2,13 +2,20 @@ console.log('myamazon.js');
 
 import Store2 from './store';
 
-export type Item = {
+type Item = {
   name: string,
   price: number,
   qtty: number,
 }
 
-export const store = new Store2(
+// `State` declares an object type with an undefined number of
+// properties whose names are strings and whose values are of
+// arrays of `Item`s
+interface State {
+  [i:string]: Item[];
+}
+
+export const store = new Store2<State>(
                        {
                          data: [
                            {name: 'benjerry', price: 5.95, qtty: 0},
