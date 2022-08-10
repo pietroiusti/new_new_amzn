@@ -15,22 +15,21 @@ interface State {
   [i:string]: Item[];
 }
 
-export const store = new Store2<State>(
-                       {
-                         data: [
-                           {name: 'benjerry', price: 5.95, qtty: 0},
-                           {name: 'caffelatte', price: 1.27, qtty: 0},
-                           {name: 'calippo', price: 4.10, qtty: 0},
-                           {name: 'evax', price: 2.40, qtty: 0},
-                           {name: 'pizza', price: 4.95, qtty: 0},
-                           {name: 'scottex', price: 4.50, qtty: 0},
-                           {name: 'spaghetti', price: 1.25, qtty: 0},
-                           {name: 'triangulos', price: 2.35, qtty: 0},
-                           {name: 'xibeca', price: 3.75, qtty: 0},
-                           {name: 'chipsahoy', price: 2.20, qtty: 0},
-                         ]
-                       },
-                      );
+// data we are getting from somewhere...
+let data = [
+    {name: 'benjerry', price: 5.95, qtty: 0},
+    {name: 'caffelatte', price: 1.27, qtty: 0},
+    {name: 'calippo', price: 4.10, qtty: 0},
+    {name: 'evax', price: 2.40, qtty: 0},
+    {name: 'pizza', price: 4.95, qtty: 0},
+    {name: 'scottex', price: 4.50, qtty: 0},
+    {name: 'spaghetti', price: 1.25, qtty: 0},
+    {name: 'triangulos', price: 2.35, qtty: 0},
+    {name: 'xibeca', price: 3.75, qtty: 0},
+    {name: 'chipsahoy', price: 2.20, qtty: 0},
+  ];
+
+export const store = new Store2<State>( { data } );
 
 import { actionHandler } from './actionHandler';
 
