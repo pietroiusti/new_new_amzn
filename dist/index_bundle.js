@@ -17765,7 +17765,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _myamazon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./myamazon */ "./src/js/myamazon.ts");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-console.log('actionHandler.js');
+console.log('actionHandler.ts');
 
 
 function actionHandler(obj) {
@@ -17802,7 +17802,7 @@ function actionHandler(obj) {
         _myamazon__WEBPACK_IMPORTED_MODULE_0__.store.set('data', data); // use the copy to update data in store
     }
     else if (action === 'remove') {
-        let data = _myamazon__WEBPACK_IMPORTED_MODULE_0__.store.get('data'); // get copy of data
+        let data = _myamazon__WEBPACK_IMPORTED_MODULE_0__.store.get('data');
         let index; // CHECK: could you also .find() as well?
         for (let i = 0; i < data.length; i++) {
             if (data[i].name === itemName) {
@@ -17834,7 +17834,7 @@ function actionHandler(obj) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _myamazon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./myamazon */ "./src/js/myamazon.ts");
-console.log('basket.js');
+console.log('basket.ts');
 
 class Basket extends HTMLElement {
     constructor() {
@@ -17878,7 +17878,7 @@ customElements.define('basket-el', Basket);
   \***************************/
 /***/ (() => {
 
-console.log('basket2.js');
+console.log('basket2.ts');
 class BasketStateless extends HTMLElement {
     constructor() {
         super();
@@ -17931,7 +17931,7 @@ customElements.define('basket-el2', BasketStateless);
   \************************/
 /***/ (() => {
 
-console.log('card.js');
+console.log('card.ts');
 class Item extends HTMLElement {
     constructor() {
         super();
@@ -18055,22 +18055,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _card__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./card */ "./src/js/card.ts");
 /* harmony import */ var _card__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_card__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _css_myamazon_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../css/myamazon.css */ "./src/css/myamazon.css");
-console.log('myamazon.js');
+console.log('myamazon.ts');
 
-const store = new _store__WEBPACK_IMPORTED_MODULE_0__["default"]({
-    data: [
-        { name: 'benjerry', price: 5.95, qtty: 0 },
-        { name: 'caffelatte', price: 1.27, qtty: 0 },
-        { name: 'calippo', price: 4.10, qtty: 0 },
-        { name: 'evax', price: 2.40, qtty: 0 },
-        { name: 'pizza', price: 4.95, qtty: 0 },
-        { name: 'scottex', price: 4.50, qtty: 0 },
-        { name: 'spaghetti', price: 1.25, qtty: 0 },
-        { name: 'triangulos', price: 2.35, qtty: 0 },
-        { name: 'xibeca', price: 3.75, qtty: 0 },
-        { name: 'chipsahoy', price: 2.20, qtty: 0 },
-    ]
-});
+// data we are getting from somewhere...
+let data = [
+    { name: 'benjerry', price: 5.95, qtty: 0 },
+    { name: 'caffelatte', price: 1.27, qtty: 0 },
+    { name: 'calippo', price: 4.10, qtty: 0 },
+    { name: 'evax', price: 2.40, qtty: 0 },
+    { name: 'pizza', price: 4.95, qtty: 0 },
+    { name: 'scottex', price: 4.50, qtty: 0 },
+    { name: 'spaghetti', price: 1.25, qtty: 0 },
+    { name: 'triangulos', price: 2.35, qtty: 0 },
+    { name: 'xibeca', price: 3.75, qtty: 0 },
+    { name: 'chipsahoy', price: 2.20, qtty: 0 },
+];
+const store = new _store__WEBPACK_IMPORTED_MODULE_0__["default"]({ data });
 
 
 
@@ -18098,7 +18098,7 @@ function renderBasket2() {
     let data = store.get('data');
     let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
     let totalPrice = data.reduce((acc, a) => acc + a.qtty * a.price, 0);
-    totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
+    totalPrice = Number((Math.round(totalPrice * 100) / 100).toFixed(2)); // round to two decimal places
     let basketDiv = document.getElementById('basketDiv2');
     let basket = document.createElement('basket-el2');
     basket.setAttribute('totalnumber', 'Total number of items: ' + totalNumber);
@@ -18128,9 +18128,9 @@ function render_list_of_items() {
         let name = data[i].name;
         let item = document.createElement('list-el');
         item.setAttribute('name', name);
-        item.setAttribute('price', data[i].price);
+        item.setAttribute('price', (data[i].price).toString());
         item.setAttribute('imgSrc', `../src/img/${name}.jpg`);
-        item.setAttribute('qtty', data[i].qtty);
+        item.setAttribute('qtty', (data[i].qtty).toString());
         itemList.appendChild(item);
     }
 }
@@ -18141,13 +18141,13 @@ function basketElCallback2(data) {
     //console.log('basketElCallback2');
     let totalNumber = data.reduce((acc, a) => acc + a.qtty, 0);
     let totalPrice = data.reduce((acc, a) => acc + a.qtty * a.price, 0);
-    totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
+    let totalPriceString = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
     let statelessBasket = document.getElementsByTagName('basket-el2')[0];
     //console.log(statelessBasket);
     //console.log('setting totalNumber attribute for statelessBasket');
     statelessBasket.setAttribute('totalNumber', totalNumber);
     //console.log('setting totalprice attribute for statelessBasket');
-    statelessBasket.setAttribute('totalPrice', totalPrice);
+    statelessBasket.setAttribute('totalPrice', totalPriceString);
 }
 function listElCallback2(data) {
     //console.log('listElCallback2');
@@ -18155,7 +18155,7 @@ function listElCallback2(data) {
     for (let i = 0; i < itemList.children.length; i++) {
         //console.log(itemList.children[i]);
         let item = itemList.children[i];
-        item.setAttribute('qtty', data[i].qtty); // this relies on the
+        item.setAttribute('qtty', data[i].qtty.toString()); // this relies on the
         // fact that data and
         // itemList have the same
         // members in the same
@@ -18187,7 +18187,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 
-console.log('store.js');
+console.log('store.ts');
 class Store2 {
     constructor(state) {
         this.listeners = {};
@@ -18320,6 +18320,7 @@ var __webpack_exports__ = {};
   \*************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _myamazon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./myamazon */ "./src/js/myamazon.ts");
+console.log('index.ts');
 
 (0,_myamazon__WEBPACK_IMPORTED_MODULE_0__.init)();
 

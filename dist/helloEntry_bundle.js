@@ -41,6 +41,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "hello": () => (/* binding */ hello)
 /* harmony export */ });
+console.log('test.ts');
 function hello() {
     console.log('hello world from test.js (another webpack entry) (which means we are gonna have another chunk)!');
 }
