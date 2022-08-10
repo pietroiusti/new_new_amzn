@@ -1,5 +1,5 @@
 'use strict';
-console.log('store.js');
+console.log('store.ts');
 
 import _ from 'lodash';
 

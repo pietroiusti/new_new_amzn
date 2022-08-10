@@ -1,4 +1,4 @@
-console.log('actionHandler.js');
+console.log('actionHandler.ts');
 
 import { store } from "./myamazon";
 import _ from 'lodash';

@@ -1,4 +1,4 @@
-console.log('basket2.js');
+console.log('basket2.ts');
 
 class BasketStateless extends HTMLElement {
   connectedCallbackHasBeenCalled: boolean;

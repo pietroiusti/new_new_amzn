@@ -1,4 +1,4 @@
-console.log('basket.js');
+console.log('basket.ts');
 
 import { store } from "./myamazon";
 

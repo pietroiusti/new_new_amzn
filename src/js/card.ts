@@ -1,4 +1,4 @@
-console.log('card.js');
+console.log('card.ts');
 
 class Item extends HTMLElement {
   connectedCallbackHasBeenCalled: boolean;

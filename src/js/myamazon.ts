@@ -1,4 +1,4 @@
-console.log('myamazon.js');
+console.log('myamazon.ts');
 
 import Store2 from './store';
 
