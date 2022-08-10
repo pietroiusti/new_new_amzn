@@ -21,7 +21,7 @@ class Store2<T> {
     this.listeners[prop].push(cb);
   }
 
-  get(prop: string) {
+  get(prop: keyof T) {
     return this.state[prop];
   }
 

@@ -67,7 +67,7 @@ function renderBasket2(): void {
   let data = store.get('data');
   let totalNumber = data.reduce((acc: any, a: { qtty: any; }) => acc + a.qtty, 0);
   let totalPrice = data.reduce((acc: number, a: { qtty: number; price: number; }) => acc + a.qtty*a.price, 0);
-  totalPrice = (Math.round(totalPrice * 100) / 100).toFixed(2); // round to two decimal places
+  totalPrice = Number((Math.round(totalPrice * 100) / 100).toFixed(2)); // round to two decimal places
 
   let basketDiv = document.getElementById('basketDiv2');
   let basket = document.createElement('basket-el2');
@@ -103,9 +103,9 @@ function render_list_of_items(): void {
     let item = document.createElement('list-el');
 
     item.setAttribute('name', name);
-    item.setAttribute('price', data[i].price);
+    item.setAttribute('price', (data[i].price).toString());
     item.setAttribute('imgSrc', `../src/img/${name}.jpg`);
-    item.setAttribute('qtty', data[i].qtty);
+    item.setAttribute('qtty', (data[i].qtty).toString());
     itemList.appendChild(item);
   }
 }
