@@ -28,8 +28,11 @@ class Store2<T> {
   set(prop: string, newVal: any[]) {
     //console.log('store set');
     this.state[prop] = newVal;
-    for (let f of this.listeners[prop]) {
-      f(newVal);
+
+    if (prop in this.listeners) {
+     for (let f of this.listeners[prop]) {
+        f(newVal);
+      }
     }
   }
 }

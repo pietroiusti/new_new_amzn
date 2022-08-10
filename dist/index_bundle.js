@@ -18071,6 +18071,12 @@ let data = [
     { name: 'chipsahoy', price: 2.20, qtty: 0 },
 ];
 const store = new _store__WEBPACK_IMPORTED_MODULE_0__["default"]({ data });
+let people = [
+    { name: 'John', surname: 'Todd', registration: new Date(1995, 11, 17) },
+    { name: 'Marta', surname: 'Ross', registration: new Date(2008, 11, 17) },
+    { name: 'Bill', surname: 'Norton', registration: new Date(2008, 11, 17) },
+];
+store.set('people', people);
 
 
 
@@ -18204,8 +18210,10 @@ class Store2 {
     set(prop, newVal) {
         //console.log('store set');
         this.state[prop] = newVal;
-        for (let f of this.listeners[prop]) {
-            f(newVal);
+        if (prop in this.listeners) {
+            for (let f of this.listeners[prop]) {
+                f(newVal);
+            }
         }
     }
 }

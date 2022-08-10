@@ -31,6 +31,18 @@ let data = [
 
 export const store = new Store2<State>( { data } );
 
+interface Person {
+  name: string;
+  surname: string;
+  registration: Date;
+}
+let people: Person[] = [
+  {name: 'John', surname: 'Todd', registration: new Date(1995, 11, 17)},
+  {name: 'Marta', surname: 'Ross', registration: new Date(2008, 11, 17)},
+  {name: 'Bill', surname: 'Norton', registration: new Date(2008, 11, 17)},
+];
+store.set('people', people);
+
 import { actionHandler } from './actionHandler';
 
 import './basket';
