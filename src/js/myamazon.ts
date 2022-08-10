@@ -44,13 +44,13 @@ import '../css/myamazon.css';
 let itemList = document.getElementById('itemList');
 itemList.addEventListener('addItem', (e: Event): void => {
   //console.log('itemList event listener');
-  let parent = (<HTMLButtonElement>e.target).parentElement;
+  let parent = (e.target as HTMLButtonElement).parentElement;
   let name = parent.id;
   actionHandler( {action: 'add', itemName: name} );
 });
 
 itemList.addEventListener('removeItem', (e: Event): void => {
-  let parent = (<HTMLButtonElement>e.target).parentElement;
+  let parent = (e.target as HTMLButtonElement).parentElement;
   let name = parent.id;
   actionHandler( {action: 'remove', itemName: name} );
 });
