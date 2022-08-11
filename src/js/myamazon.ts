@@ -2,7 +2,7 @@ console.log('myamazon.ts');
 
 import Store2 from './store';
 
-type Item = {
+interface Item { //`inteface` is generally preferred over `type`...
   name: string,
   price: number,
   qtty: number,

@@ -123,3 +123,8 @@ npm install --save-dev style-loader css-loader
   - install: ~npm install webpack-dev-server --save-dev~;
   - add some conf to webpack.config.js;
   - start with: ~npx webpack serve~.
+
+* From JavaScript to TypeScript
+- turn js file into ts files
+- add types
+- Use a generic type for the store.
