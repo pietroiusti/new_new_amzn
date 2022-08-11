@@ -4,9 +4,12 @@ console.log('store.ts');
 import _ from 'lodash';
 
 class Store2<T> {
-  listeners: {[key:string]:Function[]};// listeners is an object with an undefined number
-                                       // of members whose names are strings (rather than
-                                       // numbers or symbols) and whose values are array of functions
+  listeners: {[key:string]:Function[]};// listeners is an object with
+                                       // an undefined number of
+                                       // members whose names are
+                                       // strings (rather than numbers
+                                       // or symbols) and whose values
+                                       // are arrays of functions
   state: T;
 
   constructor(state: T) {
@@ -14,7 +17,7 @@ class Store2<T> {
     this.state = state;
   }
   
-  register(prop: string, cb: { (data: any): void; (data: any): void; (data: any): void; }) {
+  register(prop: string, cb: (data: any) => void) {
     if (!this.listeners[prop])
       this.listeners[prop] = [];
     
