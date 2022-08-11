@@ -143,7 +143,7 @@ function basketElCallback2(data: Item[]): void {
   statelessBasket.setAttribute('totalPrice', totalPriceString);
 }
 
-function listElCallback2(data: Item[]) {
+function listElCallback2(data: Item[]): void {
   //console.log('listElCallback2');
   let itemList = document.getElementById('itemList');
   for (let i = 0; i < itemList.children.length; i++) {
